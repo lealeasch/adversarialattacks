@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Adverarial Attacks</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
+      <div class="smooth-scroll">
+        <a class="navbar-brand smooth-scroll" href="#title">Adversarial Attacks</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto smooth-scroll">
+            <li class="nav-item">
+              <a class="nav-link" href="#intro">Introduction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#systems">ASR Systems</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#psycho">Psychoacoustics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#attack">Attack</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#paper">Paper</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#example">Example</a>
+              </li>
+          </ul>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <br>
+
+  <div class="pt-5 mx-lg-5">
+    <div class="container" id="title">
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-sm-2">
+            <img src="images/attacker.png" width="80%" alt="">
+          </div>
+          <div class="col-sm-10">
+            <h1 class="h1-responsive">Adversarial Attacks Against ASR Systems via Psychoacoustic Hiding</h1>
+            <hr class="my-2">
+
+            <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa</p>
+            <p> Ruhr-Universit&auml;t Bochum</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="container" id="intro">
+      <h1 class="display-4">Introduction</h1>
+      <hr>
+
+      <br>
+
+      <div class="row">
+        <div class="col-sm-8">
+          <!--<h2>Automatic Speech Recognition</h2>-->
+          <p>Automatic Speech Recognition (ASR) systems can recognize speech and recently, they have become almost as good at it as human listeners. We find ASR systems in multiple modern systems, for example, home automation systems or personal assistants in smartphones. Especially personal assistants such as <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Alexa</a>, <a href="https://en.wikipedia.org/wiki/Siri">Siri</a>, or <a href="https://en.wikipedia.org/wiki/Cortana">Cortana</a> are widely deployed these days. ASR systems can translate and even recognize spoken language and provide a written transcript of the spoken language. Recent advances in the fields of deep learning and big data analysis supported significant progress for ASR systems. <br/>
+          In this work, we demonstrate how an adversary can attack speech recognition systems by generating an audio file that is recognized as a specific audio content by a human listener, but as a certain, possibly totally different, text by an ASR system. Some audio examples ca be found <a href="#example">here</a>. These so-called <em>adversarial examples</em> exploit the fact that ASR systems based on machine learning have some wiggle room that an attacker can exploit: by adding some distortions, we can mislead the algorithm into recognizing a different sentence. The main contribution of our work is to demonstrate that we can generate the noise in such a way that it is almost completely hidden from human listeners. For this purpose, we take advantage of a <em>psychoacoustic model of human hearing</em>, describing the masking effects of human perception, which is also used for MP3 decoding.</p>
+        </div>
+        <div class="col-sm-4">
+          <img src="images/kleine_omi.png" class="img-fluid" alt="Responsive image">
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="row">
+        <div class="col-sm-5">
+            <img src="images/motivation.png" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-sm-7">
+
+          <h2>Why (and how) can we attack ASR systems?</h2>
+
+          <ul>
+            <li>
+              <strong>Neural Networks:</strong> ASR systems can recognize spoken words using so-called <em>neural networks</em>. Such networks are inspired by the biological neural systems of animals and humans and allow a computer system to develop a certain capability for a specific task through <em>training</em>.</li>
+            <li>
+              <strong>Personal Assistants:</strong> A personal assistant, like the one you find in your smartphone or computer, helps to trigger functions of your devices just by using your voice. This is nice as long as it is you triggering the functions, but it becomes a problem if an attacker has the same capabilities. It gets even worse if you don't hear an attack taking place.
+            </li>
+            <li>
+               <strong>Psychoacoustics:</strong> Human hearing is limited to a certain range of frequencies, amplitudes, and signal dynamics. The field of <a href="https://en.wikipedia.org/wiki/Psychoacoustics">psychoacoustics</a> addresses such hearing restrictions and provides a rule set for things that humans can and cannot hear. While these rules are used in different fields, e.g., in <a href="https://en.wikipedia.org/wiki/MP3">MP3 music compression</a>, we can also utilize psychoacoustics for our attack to hide noise in such a way that humans (almost) cannot hear it.</li>
+          </ul>
+
+          In the following, you will find a short overview of the attack and its most important characteristics. If needed, you can find more background on ASR systems, psychoacoustics, or the actual implementation in our  <a href="#paper">technical paper</a>, which provides a detailed documentation of our attack.
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="container" id="systems">
+      <h1 class="display-4">ASR Systems</h1>
+      <hr>
+
+      <br>
+
+      <div class="row">
+        <div>
+          <!--<h2>Automatic Speech Recognition</h2>-->
+          <p>Automatic Speech Recognition (ASR) systems can recognize speech, recently, almost as well as human listeners. We find ASR systems in a variety of modern systems, for example, home automation systems or personal assistants in smartphones. Using different methodologies and technologies from the field of computational linguistics, ASR systems can recognize and even translate spoken languages. Advances in the fields of deep learning and big data have supported recent progress for ASR systems, however, they have also created new vulnerabilities. We can attack speech recognition systems by triggering their actions through imitated voice commands. In this work, we implement an attack that activates ASR systems without being recognized by humans. <br/>
+
+          We used Kaldi as state-of-the-art ASR system, which consists of three different steps to calculate transcriptions of raw audio:
+
+          <ul>
+            <li>
+              <strong>1. Preprocessing Audio Input:</strong> Preprocessing of the audio input is a synonym for feature extraction: this step transforms the raw input data into features that should ideally preserve all relevant information while discarding the unnecessary remainder.</li>
+            <li>
+              <strong>2. Deep Neural Network (DNN):</strong> Instead of computing the transcription directly with the DNN, the output of the DNN produces probabilities, which represent states within a Hidden Markov Model (HMM), the so-called pseudo-posteriors.
+            </li>
+            <li>
+               <strong>3. Decoding:</strong> The so-called <em>decoder</em> in ASR systems utilizes some form of graph search to find the word sequence that best fits the acoustic signal. In the attacked system, the output of the DNN, representing the HMM state probabilities, is used to evaluate this goodness-of-fit between the acoustic signal and the possible transcriptions.</li>
+          </ul>
+        
+      <!--<br>
+
+      <div class="row">
+          <div class="col-sm-4">
+              <img src="images/brainy.png" class="img-fluid" alt="Responsive image">
+            </div>
+        <div class="col-sm-8">
+          <h2>Automatic Speech Recognition</h2>
+          <p>Automatic Speech Recognition (ASR) systems understand what humans speak, even though they are machines. We find ASR systems in multiple modern systems, for example, home automation systems or personal assistants in smartphones. Using different methodologies and technologies from the field of computational linguistics, ASR systems can translate and even recognize spoken language and provide according functions. Advances in the fields of deep learning and big data supported recent progress for ASR systems. We can attack speech recognition systems by triggering the their actions through imitated voice commands. In this work, we implement an attack that activates ASR systems without being recognized by humans.</p>
+        </div>-->
+        
+      </div>
+    </div>
+
+    <br>
+
+    <div class="container" id="psycho">
+        <h1 class="display-4">Psychoacoustics</h1>
+        <hr>
+  
+        <br>
+  
+        <div class="row">
+          <div class="col-sm-8">
+            <h2>Hearing Models</h2>
+            <p>Psychoacoustic hearing thresholds describe masking effects in human acoustic perception. Probably the best-known example for this is MP3 compression [1], where the compression algorithm uses a set of computed hearing thresholds to find out which parts of the input signal are imperceptible for human listeners. By removing those parts, the audio signal can be transformed into a smaller but lossy representation, which requires less disk space and less bandwidth to store or transmit.</p>
+          </div>
+          <div class="col-sm-4">
+            <img src="images/ohrig.png" class="img-fluid" alt="Responsive image">
+          </div>
+        </div>
+  
+        <br>
+  
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="images/attacker.png" class="img-fluid" alt="Responsive image">
+              </div>
+          <div class="col-sm-8">
+            <h2>How to exploit this</h2>
+            <p>MP3 compression depends on an empirical set of hearing thresholds that define how dependencies between certain frequencies can mask, i.e., make imperceptible, other parts of an audio signal. We utilize this psychoacoustic model for our manipulations, i.e., all changes are hidden in the inperceptible parts of the audio signal..</p>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="container" id="attack">
+          <h1 class="display-4">Attack</h1>
+          <hr>
+    
+          <br>
+    
+          <div class="row">
+            <div class="col-sm-6">
+              <h2>Attack Procedure</h2>
+              <p>For the attack, in principle, we use the very the same algorithm as for the training of neural networks. The algorithm is based on <em>gradient descent</em>, but instead of updating the parameters the neural network as for training, the audio signal is modified. We use the hearing thresholds to avoid changes in easily perceptible parts of the audio signal.
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <img src="images/hiding.png" class="img-fluid" alt="Responsive image">
+            </div>
+          </div>
+    
+          <br>
+    
+          <div class="row">
+            <div class="col-sm-10">
+              <h2>Results</h2>
+              <p>In general it is possible to hide any transcription in any audio file with a success rate of nearly 100 %. <br/>
+               As an example, we have some audio clips, which are modified with the described algorithm:
+               <br/>
+            </div>
+          </div>
+
+        <div class="container" id="example">
+          <div>
+            <a class="black-text" data-toggle="collapse" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+              <h3>Audio Examples&nbsp
+                <i class="fa fa-angle-down rotate-icon"></i>
+              </h5>
+            </a>
+            <div class="collapse show" id="collapse11">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-text">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <h4>Adversarial:</h4>
+                          <audio controls>
+                            <source src="audio/sa7.mp3" type="audio/mp3">
+                              Your browser does not support the audio element.
+                          </audio>
+                          <div>
+                            <a class="black-text" data-toggle="collapse" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                              <h6>Transcription&nbsp
+                                <i class="fa fa-angle-down rotate-icon"></i>
+                              </h6>
+                             </a>
+                              <div class="collapse" id="collapse5">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="card-text">
+                                        DEACTIVATE  SECURITY  CAMERA  AND  UNLOCK  FRONT  DOOR
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <h4>Original:</h4>
+                          <audio controls>
+                            <source src="audio/sa7_original.mp3" type="audio/mp3">
+                            Your browser does not support the audio element.
+                          </audio>
+                          <div>
+                            <a class="black-text" data-toggle="collapse" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                              <h6>Transcription&nbsp
+                                <i class="fa fa-angle-down rotate-icon"></i>
+                              </h6>
+                            </a>
+                            <div class="collapse" id="collapse6">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div class="card-text">
+                                      SPECIFICALLY  THE  UNION  SAID  IT  WAS  PROPOSING  TO  PURCHASE  ALL  OF  THE  ASSETS  OF  THE  OF  UNITED  AIRLINES  INCLUDING  PLANES  GATES  FACILIAND  LANDING  RIGHTS                          </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <h4>Difference:</h4>
+                            <audio controls>
+                              <source src="audio/sa7_diff.mp3" type="audio/mp3">
+                              Your browser does not support the audio element.
+                            </audio>
+                            </div>
+                            </div>
+                          <br>
+                          <br>
+                        <div class="row">
+                          <div class="col-sm-4">
+                              <h4>Adversarial:</h4>
+                              <audio controls>
+                                <source src="audio/b062.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                              <div>
+                                  <a class="black-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                    <h6>Transcription&nbsp
+                                      <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h6>
+                                  </a>
+                                  <div class="collapse" id="collapse1">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="card-text">
+                                          VISIT EVIL DOT NET AND INSTALL THE BACKDOOR
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <h4>Original:</h4>
+                              <audio controls>
+                                <source src="audio/b062_original.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                              <div>
+                                  <a class="black-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                    <h6>Transcription&nbsp
+                                      <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h6>
+                                  </a>
+                                  <div class="collapse" id="collapse2">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="card-text">
+                                          JUDGE  FISH
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <h4>Difference:</h4>
+                              <audio controls>
+                                <source src="audio/b062_diff.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <div class="row">
+                          <div class="col-sm-4">
+                              <h4>Adversarial:</h4>
+                              <audio controls>
+                                <source src="audio/music.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                              <div>
+                                  <a class="black-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                    <h6>Transcription&nbsp
+                                      <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h6>
+                                  </a>
+                                  <div class="collapse" id="collapse3">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="card-text">
+                                            ACTIVATE EMERGENCY BREAK AND LOCK ALL DOORS
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <h4>Original:</h4>
+                              <audio controls>
+                                <source src="audio/music_original.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                              <div>
+                                  <a class="black-text" data-toggle="collapse" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                    <h6>Transcription&nbsp
+                                      <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h6>
+                                  </a>
+                                  <div class="collapse" id="collapse4">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="card-text">
+                                            ALAN A NINE MONTH UNCERTAIN
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                              <div class="col-sm-4">
+                              <h4>Difference:</h4>
+                              <audio controls>
+                                <source src="audio/music_diff.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <div class="row">
+                          <div class="col-sm-4">
+                              <h4>Adversarial:</h4>
+                              <audio controls>
+                                <source src="audio/s87.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                              <div>
+                                  <a class="black-text" data-toggle="collapse" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                    <h6>Transcription&nbsp
+                                      <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h6>
+                                  </a>
+                                  <div class="collapse" id="collapse7">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="card-text">
+                                          I BELIEVE  ALL  PEOPLE  ARE  GOOD
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <h4>Original:</h4>
+                              <audio controls>
+                                <source src="audio/s87_original.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                              <div>
+                                  <a class="black-text" data-toggle="collapse" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                    <h6>Transcription&nbsp
+                                      <i class="fa fa-angle-down rotate-icon"></i>
+                                    </h6>
+                                  </a>
+                                  <div class="collapse" id="collapse8">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="card-text">
+                                          THE  WALLOP  PROPOSAL  WOULD  COST  FIVE  POINT  FOUR  TWO  BILLION  DOLLARS  OVER  FIVE  YEARS
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <h4>Difference:</h4>
+                              <audio controls>
+                                <source src="audio/s87_diff.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                              </audio>
+                            </div>
+                          </div>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<br>
+
+    <div class="container" id="paper">
+        <h1 class="display-4">Technical Paper</h1>
+        <hr>
+
+      <div>
+        If you want to cite the <a href="https://arxiv.org/abs/1808.05665" target="_blank">paper</a>, please use the following BibTeX entry:
+      </div>
+
+      <br>
+      <pre class="code">@inproceedings{schonherr2018adversarial,
+    author = {Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa},
+    title = {Adversarial Attacks Against Automatic Speech Recognition Systems via Psychoacoustic Hiding},
+    journal = {ArXiv preprints},
+    year = {2018},
+    month = aug,
+    url = {https://arxiv.org/abs/1808.05665}
+}
+      </pre>
+    </div>
+
+    <br>
+
+    <div class="container" id="faq">
+      <h1 class="display-4">Frequently Asked Questions</h1>
+      <hr>
+
+      <div>
+
+        <a class="black-text" data-toggle="collapse" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+          <h5>Can this happen to me?&nbsp
+            <i class="fa fa-angle-down rotate-icon"></i>
+          </h5>
+        </a>
+        <div class="collapse" id="collapse9">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-text">
+                No, never.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div>
+        <a class="black-text" data-toggle="collapse" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+          <h5>Can we finally get some merch?&nbsp
+            <i class="fa fa-angle-down rotate-icon"></i>
+          </h5>
+        </a>
+        <div class="collapse" id="collapse10">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-text">
+                Definitely! Yes! We started to print shirts and underwear, as these were highly requested items in prior projects. In the near future, there will also be attacker-icon piercings for generic parts of your body, a series of smart casual apparel, and multi-functional can openers. Please be aware that we support fair trade production facilities and must charge an extra political-correctness fee of 23% of the original item price. Let's create a better world, together!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+    </div>
+  </div>
+  </div>
+
+  <footer class="page-footer font-small elegant-color-dark pt-4 mt-4">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h5 class="text-uppercase">Adversarial Attacks</h5>
+            <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa</br>
+            Ruhr-Universit&auml;t Bochum</p>
+        </div>
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <div class="col-md-6 mb-md-0 mb-3">
+          <h5 class="text-uppercase"><a href="/contact.html">Contact</a></h5>
+          <h5 class="text-uppercase"><a href="/privacy.html">Privacy</a></h5>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script>
+    $('.navbar-collapse a').click(function () {
+      $(".navbar-collapse").collapse('hide');
+    });
+  </script>
+  <script>
+    $(".smooth-scroll").on('click', 'a', function (event) {
+      event.preventDefault();
+      var elAttr = $(this).attr('href');
+      var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
+      var fixedTop = $('.navbar.fixed-top');
+      if (fixedTop && fixedTop.length) {
+        offset = fixedTop.outerHeight();
+      }
+      $('body,html').animate({
+        //scrollTop: $(elAttr).offset().top - offset
+        scrollTop: $(elAttr).offset().top - 56
+      }, 700);
+    });
+  </script>
+</body>
+
+</html>

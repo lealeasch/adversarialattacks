@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Breaking LTE on Layer Two</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
+        @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+        figure.snip1390 {
+            font-family: 'Roboto', Arial, sans-serif;
+            position: relative;
+            float: left;
+            overflow: hidden;
+            margin: 10px 1%;
+            min-width: 230px;
+            max-width: 315px;
+            width: 100%;
+            color: #000000;
+            text-align: center;
+            font-size: 16px;
+            background-color: #4B515D;
+            padding: 30px;
+            #background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        figure.snip1390 *,
+        figure.snip1390 *:before,
+        figure.snip1390 *:after {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.35s ease;
+            transition: all 0.35s ease;
+        }
+
+        figure.snip1390 figcaption {
+            width: 100%;
+        }
+
+        figure.snip1390 h2,
+        figure.snip1390 h4,
+        figure.snip1390 blockquote {
+            margin: 0;
+        }
+
+        figure.snip1390 h2,
+        figure.snip1390 h4 {
+            font-weight: 300;
+        }
+
+        figure.snip1390 h2 {
+            color: #ffffff;
+        }
+
+        figure.snip1390 h4 {
+            color: #a6a6a6;
+        }
+
+        figure.snip1390 blockquote {
+            font-size: 1em;
+            padding: 45px 20px 40px 50px;
+            margin-top: 30px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: inset -1.4px -1.4px 2px rgba(0, 0, 0, 0.3);
+            #background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            text-align: left;
+            position: relative;
+        }
+
+        figure.snip1390 blockquote:before {
+            font-family: 'FontAwesome';
+            content: "\201C";
+            position: absolute;
+            font-size: 70px;
+            opacity: 0.25;
+            font-style: normal;
+            top: 0px;
+            left: 20px;
+        }
+
+        figure.snip1390 .profile {
+            width: 130px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
+            border: solid 0px #A6A57A;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
+            <a class="navbar-brand smooth-scroll" href="/index.html#intro">aLTEr</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <!-- Left -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/index.html#intro">Introduction</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index.html#passive">Passive Attacks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index.html#active">Active Attack</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index.html#paper">Paper</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index.html#faq">FAQ</a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+<div class="pt-5 mx-lg-5">
+  <div class="container" id="title">
+        <br>
+        <div class="row d-flex justify-content-center">
+            <div class="col text-center col-md-auto">
+                <figure class="snip1390">
+                    <img src="media/d_rupprecht_small.jpg" alt="profile-sample3" class="profile" />
+                    <figcaption>
+                        <h2>David Rupprecht</h2>
+                        <br>
+                        <p class="white-text">Ruhr-University Bochum<br>Information Security Group</p>
+                        <br>
+                        <p class="card-text">
+                            <a href="mailto:david.rupprecht@rub.de" style="text-decoration: none">
+                                <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
+                            </a>
+                            &nbsp
+                            <a href="http://infsec.rub.de/lehrstuhl/mitarbeiter/rupprecht/">
+                                <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
+                            </a>
+                            &nbsp
+                            <a href="https://twitter.com/pily112">
+                                <i class="fa fa-twitter fa-2x white-text" aria-hidden="true"></i>
+                            </a>
+                            
+                        </p>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col text-center col-md-auto">
+                <figure class="snip1390">
+                    <img src="media/katha_klein.png" alt="profile-sample3" class="profile" />
+                    <figcaption>
+                        <h2>Katharina Kohls</h2>
+                        <br>
+                        <p class="white-text">Ruhr-University Bochum<br>Information Security Group</p>
+                        <br>
+                        <p class="card-text">
+                                <a href="mailto:katharina.kohls@rub.de" style="text-decoration: none">
+                                    <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                                &nbsp
+                                <a href="http://infsec.rub.de/lehrstuhl/mitarbeiter/kohls/">
+                                    <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                               
+                              
+                            </p>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col text-center col-md-auto">
+                <figure class="snip1390">
+                    <img src="media/Thorsten_quer_ws.jpg" alt="profile-sample3" class="profile" />
+                    <figcaption>
+                        <h2>Thorsten Holz</h2>
+                        <br>
+                        <p class="white-text">Ruhr-University Bochum<br>Chair for Systems Security</p>
+                        <br>
+                        <p class="card-text">
+                                <a href="mailto:thorsten.holz@rub.de" style="text-decoration: none">
+                                    <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                                &nbsp
+                                <a href="http://syssec.rub.de/~tho/">
+                                    <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                                &nbsp
+                                <a href="https://twitter.com/thorstenholz">
+                                    <i class="fa fa-twitter fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                                
+                            </p>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col text-center col-md-auto">
+                <figure class="snip1390">
+                    <img src="media/Christina.png" alt="profile-sample3" class="profile" />
+                    <figcaption>
+                        <h2>Christina Pöpper</h2>
+                        <br>
+                        <p class="white-text">New York University Abu Dhabi<br>Center for Cyber Security NYUAD</p>
+                        <br>
+                        <p class="card-text">
+                                <a href="mailto:christina.poepper@nyu.edu" style="text-decoration: none">
+                                    <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                                &nbsp
+                                <a href="http://poepper.net/">
+                                    <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
+                                </a>
+                                
+                            </p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer font-small elegant-color-dark pt-4 mt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">Breaking LTE on Layer Two</h5>
+        <p>David Rupprecht, Katharina Kohls, Thorsten Holz, and Christina P&ouml;pper</br>
+            Ruhr-Universit&auml;t Bochum &amp; New York University Abu Dhabi</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase"><a href="/contact.html">Contact</a></h5>
+        <h5 class="text-uppercase"><a href="/privacy.html">Privacy</a></h5>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <!--<div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
+  </div>-->
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script>
+        $('.navbar-collapse a').click(function () {
+            $(".navbar-collapse").collapse('hide');
+        });
+    </script>
+    <script>
+        $(".smooth-scroll").on('click', 'a', function (event) {
+            event.preventDefault();
+            var elAttr = $(this).attr('href');
+            var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
+            var fixedTop = $('.navbar.fixed-top');
+            if (fixedTop && fixedTop.length) {
+                offset = fixedTop.outerHeight();
+            }
+            $('body,html').animate({
+                //scrollTop: $(elAttr).offset().top - offset
+                scrollTop: $(elAttr).offset().top - 56
+            }, 700);
+        });
+    </script>
+</body>
+
+</html>
