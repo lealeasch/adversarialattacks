@@ -5,11 +5,32 @@
   <title>Adverarial Attacks</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PSM Comparison"/>
+  <meta name="keywords" content="Adverarial Attacks, Automatic Speech Recognition, Deep Neural Networks"/>
+  <meta name="author" content="Lea Schönherr">
+  <link href="css/fontawesome-all.min.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/mdb.min.css" rel="stylesheet" media="screen">
+  <link href="css/style.min.css" rel="stylesheet" media="screen">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/mdb.min.css" rel="stylesheet">
-  <link href="css/style.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
+  <link rel="manifest" href="ico/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
@@ -24,8 +45,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <!-- Left -->
           <ul class="navbar-nav mr-auto smooth-scroll">
             <li class="nav-item">
               <a class="nav-link" href="#intro">Introduction</a>
@@ -44,9 +63,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#example">Example</a>
-              </li>
+            </li>
           </ul>
-        </ul>
       </div>
     </nav>
   </header>
@@ -58,12 +76,11 @@
       <div class="jumbotron">
         <div class="row">
           <div class="col-sm-2">
-            <img src="images/attacker.png" width="80%" alt="">
+            <img src="images/attacker.png" width="120" alt="Attacker">
           </div>
           <div class="col-sm-10">
             <h1 class="h1-responsive">Adversarial Attacks Against ASR Systems via Psychoacoustic Hiding</h1>
             <hr class="my-2">
-
             <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa</p>
             <p> Ruhr-Universit&auml;t Bochum</p>
           </div>
@@ -71,6 +88,14 @@
       </div>
     </div>
 
+    <br>
+    <div class="container" id="tldr">
+    <div class="row">
+      <div class="col-sm-12">
+      <b>TL;DR:</b> Psychoacoustic hiding of speech commands as an adversarial attacks against automatic speech recognition systems.
+      </div>
+    </div>
+    </div>
     <br>
 
     <div class="container" id="intro">
@@ -82,11 +107,13 @@
       <div class="row">
         <div class="col-sm-8">
           <!--<h2>Automatic Speech Recognition</h2>-->
-          <p>Automatic Speech Recognition (ASR) systems can recognize speech and recently, they have become almost as good at it as human listeners. We find ASR systems in multiple modern systems, for example, home automation systems or personal assistants in smartphones. Especially personal assistants such as <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Alexa</a>, <a href="https://en.wikipedia.org/wiki/Siri">Siri</a>, or <a href="https://en.wikipedia.org/wiki/Cortana">Cortana</a> are widely deployed these days. ASR systems can translate and even recognize spoken language and provide a written transcript of the spoken language. Recent advances in the fields of deep learning and big data analysis supported significant progress for ASR systems. <br/>
-          In this work, we demonstrate how an adversary can attack speech recognition systems by generating an audio file that is recognized as a specific audio content by a human listener, but as a certain, possibly totally different, text by an ASR system. Some audio examples ca be found <a href="#example">here</a>. These so-called <em>adversarial examples</em> exploit the fact that ASR systems based on machine learning have some wiggle room that an attacker can exploit: by adding some distortions, we can mislead the algorithm into recognizing a different sentence. The main contribution of our work is to demonstrate that we can generate the noise in such a way that it is almost completely hidden from human listeners. For this purpose, we take advantage of a <em>psychoacoustic model of human hearing</em>, describing the masking effects of human perception, which is also used for MP3 decoding.</p>
+          <p>Personal assistants such as <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Alexa</a>, <a href="https://en.wikipedia.org/wiki/Siri">Siri</a>, or <a href="https://en.wikipedia.org/wiki/Cortana">Cortana</a> are widely deployed these days. Such Automatic Speech Recognition (ASR) systems can translate and even recognize spoken language and provide a written transcript of the spoken language. Recent advances in the fields of deep learning and big data analysis supported significant progress for ASR systems and have become almost as good at it as human listeners. <br>
+          In this work, we demonstrate how an adversary can attack speech recognition systems by generating an audio file that is recognized as a specific audio content by a human listener, but as a certain, possibly totally different, text by an ASR system: <br>
+          More <a href="#example">audio examples</a> ca be found at the end of the articel. <br>
+          These so-called <em>adversarial examples</em> exploit the fact that ASR systems based on machine learning have some wiggle room that an attacker can exploit: by adding some distortions, we can mislead the algorithm into recognizing a different sentence. The main contribution of our work is to demonstrate that we can generate the noise in such a way that it is almost completely hidden from human listeners. For this purpose, we take advantage of a <em>psychoacoustic model of human hearing</em>, describing the masking effects of human perception, which is also used for MP3 decoding.</p>
         </div>
         <div class="col-sm-4">
-          <img src="images/kleine_omi.png" class="img-fluid" alt="Responsive image">
+          <img src="images/kleine_omi.png" class="img-fluid" alt="Kleine Omi">
         </div>
       </div>
 
@@ -95,7 +122,7 @@
 
       <div class="row">
         <div class="col-sm-5">
-            <img src="images/motivation.png" class="img-fluid" alt="Responsive image">
+            <img src="images/motivation.png" class="img-fluid" alt="Motivation">
         </div>
         <div class="col-sm-7">
 
@@ -125,20 +152,20 @@
       <br>
 
       <div class="row">
-        <div>
+        <div class="col-sm-12">
           <!--<h2>Automatic Speech Recognition</h2>-->
-          <p>Automatic Speech Recognition (ASR) systems can recognize speech, recently, almost as well as human listeners. We find ASR systems in a variety of modern systems, for example, home automation systems or personal assistants in smartphones. Using different methodologies and technologies from the field of computational linguistics, ASR systems can recognize and even translate spoken languages. Advances in the fields of deep learning and big data have supported recent progress for ASR systems, however, they have also created new vulnerabilities. We can attack speech recognition systems by triggering their actions through imitated voice commands. In this work, we implement an attack that activates ASR systems without being recognized by humans. <br/>
+          <p>Automatic Speech Recognition (ASR) systems can recognize speech, recently, almost as well as human listeners. We find ASR systems in a variety of modern systems, for example, home automation systems or personal assistants in smartphones. Using different methodologies and technologies from the field of computational linguistics, ASR systems can recognize and even translate spoken languages. Advances in the fields of deep learning and big data have supported recent progress for ASR systems, however, they have also created new vulnerabilities. We can attack speech recognition systems by triggering their actions through imitated voice commands. In this work, we implement an attack that activates ASR systems without being recognized by humans. <br>
 
           We used Kaldi as state-of-the-art ASR system, which consists of three different steps to calculate transcriptions of raw audio:
 
           <ul>
             <li>
-              <strong>1. Preprocessing Audio Input:</strong> Preprocessing of the audio input is a synonym for feature extraction: this step transforms the raw input data into features that should ideally preserve all relevant information while discarding the unnecessary remainder.</li>
+              <strong>Preprocessing Audio Input:</strong> This step transforms the raw input data into <em>features</em> that should ideally preserve all relevant information while discarding the unnecessary remainder.</li>
             <li>
-              <strong>2. Deep Neural Network (DNN):</strong> Instead of computing the transcription directly with the DNN, the output of the DNN produces probabilities, which represent states within a Hidden Markov Model (HMM), the so-called pseudo-posteriors.
+              <strong>Neural Network:</strong> The DNN uses the feature representation of the audio input to caclulate a representation of words sequences.
             </li>
             <li>
-               <strong>3. Decoding:</strong> The so-called <em>decoder</em> in ASR systems utilizes some form of graph search to find the word sequence that best fits the acoustic signal. In the attacked system, the output of the DNN, representing the HMM state probabilities, is used to evaluate this goodness-of-fit between the acoustic signal and the possible transcriptions.</li>
+               <strong>Decoding:</strong> The so-called <em>decoder</em> in ASR systems utilizes some form of graph search to find the transcription that best fits the audio input.</li>
           </ul>
         
       <!--<br>
@@ -151,7 +178,7 @@
           <h2>Automatic Speech Recognition</h2>
           <p>Automatic Speech Recognition (ASR) systems understand what humans speak, even though they are machines. We find ASR systems in multiple modern systems, for example, home automation systems or personal assistants in smartphones. Using different methodologies and technologies from the field of computational linguistics, ASR systems can translate and even recognize spoken language and provide according functions. Advances in the fields of deep learning and big data supported recent progress for ASR systems. We can attack speech recognition systems by triggering the their actions through imitated voice commands. In this work, we implement an attack that activates ASR systems without being recognized by humans.</p>
         </div>-->
-        
+        </div>
       </div>
     </div>
 
@@ -166,10 +193,10 @@
         <div class="row">
           <div class="col-sm-8">
             <h2>Hearing Models</h2>
-            <p>Psychoacoustic hearing thresholds describe masking effects in human acoustic perception. Probably the best-known example for this is MP3 compression [1], where the compression algorithm uses a set of computed hearing thresholds to find out which parts of the input signal are imperceptible for human listeners. By removing those parts, the audio signal can be transformed into a smaller but lossy representation, which requires less disk space and less bandwidth to store or transmit.</p>
+            <p>Psychoacoustic hearing thresholds describe masking effects in human acoustic perception. Probably the best-known example for this is MP3 compression, where the compression algorithm uses a set of computed hearing thresholds to find out which parts of the input signal are imperceptible for human listeners. By removing those parts, the audio signal can be transformed into a smaller but lossy representation, which requires less disk space and less bandwidth to store or transmit.</p>
           </div>
           <div class="col-sm-4">
-            <img src="images/ohrig.png" class="img-fluid" alt="Responsive image">
+            <img src="images/ohrig.png" class="img-fluid" alt="Ohrring">
           </div>
         </div>
   
@@ -177,7 +204,7 @@
   
         <div class="row">
             <div class="col-sm-2">
-                <img src="images/attacker.png" class="img-fluid" alt="Responsive image">
+                <img src="images/attacker.png" class="img-fluid" alt="Attacker">
               </div>
           <div class="col-sm-8">
             <h2>How to exploit this</h2>
@@ -200,7 +227,7 @@
               </p>
             </div>
             <div class="col-sm-6">
-              <img src="images/hiding.png" class="img-fluid" alt="Responsive image">
+              <img src="images/hiding.png" class="img-fluid" alt="Hiding">
             </div>
           </div>
     
@@ -209,18 +236,18 @@
           <div class="row">
             <div class="col-sm-10">
               <h2>Results</h2>
-              <p>In general it is possible to hide any transcription in any audio file with a success rate of nearly 100 %. <br/>
+              <p>In general it is possible to hide any transcription in any audio file with a success rate of nearly 100 %. <br>
                As an example, we have some audio clips, which are modified with the described algorithm:
-               <br/>
+               <br>
             </div>
           </div>
 
         <div class="container" id="example">
           <div>
             <a class="black-text" data-toggle="collapse" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
-              <h3>Audio Examples&nbsp
+              <h3>Audio Examples&nbsp;
                 <i class="fa fa-angle-down rotate-icon"></i>
-              </h5>
+              </h3>
             </a>
             <div class="collapse show" id="collapse11">
               <div class="card">
@@ -235,7 +262,7 @@
                           </audio>
                           <div>
                             <a class="black-text" data-toggle="collapse" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                              <h6>Transcription&nbsp
+                              <h6>Transcription&nbsp;
                                 <i class="fa fa-angle-down rotate-icon"></i>
                               </h6>
                              </a>
@@ -258,7 +285,7 @@
                           </audio>
                           <div>
                             <a class="black-text" data-toggle="collapse" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                              <h6>Transcription&nbsp
+                              <h6>Transcription&nbsp;
                                 <i class="fa fa-angle-down rotate-icon"></i>
                               </h6>
                             </a>
@@ -291,7 +318,7 @@
                               </audio>
                               <div>
                                   <a class="black-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                    <h6>Transcription&nbsp
+                                    <h6>Transcription&nbsp;
                                       <i class="fa fa-angle-down rotate-icon"></i>
                                     </h6>
                                   </a>
@@ -314,7 +341,7 @@
                               </audio>
                               <div>
                                   <a class="black-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    <h6>Transcription&nbsp
+                                    <h6>Transcription&nbsp;
                                       <i class="fa fa-angle-down rotate-icon"></i>
                                     </h6>
                                   </a>
@@ -348,7 +375,7 @@
                               </audio>
                               <div>
                                   <a class="black-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    <h6>Transcription&nbsp
+                                    <h6>Transcription&nbsp;
                                       <i class="fa fa-angle-down rotate-icon"></i>
                                     </h6>
                                   </a>
@@ -371,7 +398,7 @@
                               </audio>
                               <div>
                                   <a class="black-text" data-toggle="collapse" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                    <h6>Transcription&nbsp
+                                    <h6>Transcription&nbsp;
                                       <i class="fa fa-angle-down rotate-icon"></i>
                                     </h6>
                                   </a>
@@ -405,7 +432,7 @@
                               </audio>
                               <div>
                                   <a class="black-text" data-toggle="collapse" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                    <h6>Transcription&nbsp
+                                    <h6>Transcription&nbsp;
                                       <i class="fa fa-angle-down rotate-icon"></i>
                                     </h6>
                                   </a>
@@ -428,7 +455,7 @@
                               </audio>
                               <div>
                                   <a class="black-text" data-toggle="collapse" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                                    <h6>Transcription&nbsp
+                                    <h6>Transcription&nbsp;
                                       <i class="fa fa-angle-down rotate-icon"></i>
                                     </h6>
                                   </a>
@@ -459,7 +486,6 @@
                 </div>
               </div>
             </div>
-          </div>
 
 <br>
 
@@ -468,14 +494,14 @@
         <hr>
 
       <div>
-        If you want to cite the <a href="https://arxiv.org/abs/1808.05665" target="_blank">paper</a>, please use the following BibTeX entry:
+        The paper is currently under submission for NDSS Symposium 2019. If you want to cite the <a href="https://arxiv.org/abs/1808.05665" target="_blank">paper</a>, please use the following BibTeX entry:
       </div>
 
       <br>
-      <pre class="code">@inproceedings{schonherr2018adversarial,
-    author = {Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa},
+      <pre class="code">@inproceedings{2018arXiv180805665S,
+    author = {Lea Sch{\"o}nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa},
     title = {Adversarial Attacks Against Automatic Speech Recognition Systems via Psychoacoustic Hiding},
-    journal = {ArXiv preprints},
+    journal = {ArXiv e-prints},
     year = {2018},
     month = aug,
     url = {https://arxiv.org/abs/1808.05665}
@@ -490,9 +516,8 @@
       <hr>
 
       <div>
-
         <a class="black-text" data-toggle="collapse" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
-          <h5>Can this happen to me?&nbsp
+          <h5>Can this happen to me?&nbsp;
             <i class="fa fa-angle-down rotate-icon"></i>
           </h5>
         </a>
@@ -500,7 +525,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-text">
-                No, never.
+                The presented attack is currently not deployed for over the air attacks. Also it is <em>not</em> tailored for an existing commercial product such as Alexa, Siri, or Cortana, but for the open source Kaldi speech recognition system. However, we think that such an attack in general is possible and in future studies we want to show that the attack also works when the signal is played through a loudspeaker reaches the voice assistant through the air.
               </div>
             </div>
           </div>
@@ -510,8 +535,45 @@
       <br>
 
       <div>
+        <a class="black-text" data-toggle="collapse" href="#collapse20" aria-expanded="false" aria-controls="collapse20">
+          <h5>What can be done to prevent such an attack?&nbsp;
+            <i class="fa fa-angle-down rotate-icon"></i>
+          </h5>
+        </a>
+        <div class="collapse" id="collapse20">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-text">
+                During the development of a speech recognition, especially during the training of the neural network, the developer need to consider the possibility of such attacks and adapt the training to not misrecognize targted or random adversarial audio input.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div>
+        <a class="black-text" data-toggle="collapse" href="#collapse21" aria-expanded="false" aria-controls="collapse21">
+          <h5>What can be a possible attack scenarios?&nbsp;
+            <i class="fa fa-angle-down rotate-icon"></i>
+          </h5>
+        </a>
+        <div class="collapse" id="collapse21">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-text">
+                Voice assissannt are often connected with online shopping or even a smart home setups. Therefore, a possible attack might target the online order of goods without the knowledge of the owner or may controll smart home devices, such as security cameras.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div>
         <a class="black-text" data-toggle="collapse" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
-          <h5>Can we finally get some merch?&nbsp
+          <h5>Can we finally get some merch?&nbsp;
             <i class="fa fa-angle-down rotate-icon"></i>
           </h5>
         </a>
@@ -529,15 +591,13 @@
       <br>
 
     </div>
-  </div>
-  </div>
 
   <footer class="page-footer font-small elegant-color-dark pt-4 mt-4">
     <div class="container-fluid text-center text-md-left">
       <div class="row">
         <div class="col-md-6 mt-md-0 mt-3">
           <h5 class="text-uppercase">Adversarial Attacks</h5>
-            <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa</br>
+            <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa<br>
             Ruhr-Universit&auml;t Bochum</p>
         </div>
         <hr class="clearfix w-100 d-md-none pb-3">
@@ -550,10 +610,10 @@
   </footer>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/mdb.min.js"></script>
   <script>
     $('.navbar-collapse a').click(function () {
       $(".navbar-collapse").collapse('hide');
