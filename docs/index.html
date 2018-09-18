@@ -644,12 +644,11 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/mdb.min.js"></script>
   <script type="text/javascript" src="js/wavesurfer/wavesurfer.min.js"></script>
-  <!--<script type="text/javascript" src="js/wavesurfer/plugin/spectrogram.js"></script>-->
   <script type="text/javascript" src="js/typed.js"></script>
   <script type="text/javascript" src="settings.js"></script>  
   <script>
     $('.navbar-collapse a').click(function () {
-      $(".navbar-collapse").collapse('hide');
+    $(".navbar-collapse").collapse('hide');
     });
   </script>
   <script>
@@ -662,24 +661,18 @@
         offset = fixedTop.outerHeight();
       }
       $('body,html').animate({
-        //scrollTop: $(elAttr).offset().top - offset
         scrollTop: $(elAttr).offset().top - 56
       }, 700);
     });
   </script>
 <script>
+
     var wavesurfer = WaveSurfer.create({
         container: '#waveform',
         waveColor: '#82b1ff',
         interact: false,
         barWidth: 3,
         progressColor: '#f7f7f7',
-        /*plugins: [
-            WaveSurfer.spectrogram.create({
-                wavesurfer: wavesurfer,
-                container: "#wave-spectrogram"
-            })
-        ]*/
         
     });
     
@@ -696,7 +689,6 @@
     <script>
     
     $(function() {
-//         $('#spectrums').hide();
         $('#player').hide();
     });
 
@@ -718,68 +710,19 @@
             wavesurfer.play();  
         });
         
-//         // Load Images
-//         $('#spectrum').find('img').remove();
-//         //$('#spectrum_1').find('img').remove();
-//         $('#spectrum_noise').find('img').remove();
-// 
-//         
-//         var counter = 0;
-//         for(var id in settings){
-//             if(settings[id]["group"] == currentCardNumber){
-//                 if(settings[id]["type"] == "original"){
-//                     $('#spectrum').append('<img id="spectrumToggle" data-spec-type="'+settings[id]["type"]+'" width="100%" onclick="toggleSpectrum()" src="img/spectra/'+settings[id]["file"]+'.png" />');
-//                 }
-//                 
-//                 if(settings[id]["type"] == "noise"){
-//                     $('#spectrum_noise').append('<img width="100%" src="img/spectra/'+settings[id]["file"]+'.png" />');
-//                 }
-//             }
-//         }
-
         
     }
     
-//     function toggleSpectrum(){
-// 
-//         var a = $('#spectrumToggle').data('spec-type');
-//         if(a == "original"){
-//             for(var id in settings){
-//                 if(settings[id]["group"] == currentCardNumber && settings[id]["type"] == "modified"){  
-//                     $('#spectrumToggle').attr('src', 'img/spectra/'+settings[id]["file"]+'.png');
-//                     $('#figcaption_toggle').text("Modified");
-//                 }
-//             }
-//             
-//             $('#spectrumToggle').data('spec-type', "modified"); //setter
-//         }
-//         else{
-//             for(var id in settings){
-//                 if(settings[id]["group"] == currentCardNumber && settings[id]["type"] == "original"){  
-//                     $('#spectrumToggle').attr('src', 'img/spectra/'+settings[id]["file"]+'.png');
-//                     $('#figcaption_toggle').text("Original");
-//                 }
-//             }
-//             $('#spectrumToggle').data('spec-type', "original"); //setter
-//         }
-//     }
     
     function stopFile(){
         wavesurfer.stop();
         wavesurfer.empty();
         typedObj.reset(false);
-        //$('#spectrums').hide(500);
         $('#player').hide(500);
 
     }
     
-/*    function showHideSpectrogram(){
-        $('#spectrums').toggle(100,function() {
-            $('html, body').animate({
-                scrollTop: $("#spectrums").offset().top
-            }, 500);
-        });
-    }  */  
+
 
     </script>  
 </body>
