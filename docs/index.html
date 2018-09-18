@@ -111,9 +111,9 @@
           <!--<h2>Automatic Speech Recognition</h2>-->
           <p>Personal assistants such as <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Alexa</a>, <a href="https://en.wikipedia.org/wiki/Siri">Siri</a>, or <a href="https://en.wikipedia.org/wiki/Cortana">Cortana</a> are widely deployed these days. Such Automatic Speech Recognition (ASR) systems can translate and even recognize spoken language and provide a written transcript of the spoken language. Recent advances in the fields of deep learning and big data analysis supported significant progress for ASR systems and have become almost as good at it as human listeners. <br>
           In this work, we demonstrate how an adversary can attack speech recognition systems by generating an audio file that is recognized as a specific audio content by a human listener, but as a certain, possibly totally different, text by an ASR system: <br>
-            <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile('2','6')"><i class="fa fa-play"></i> Original</button>
-            <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile('2','7')"><i class="fa fa-play"></i> Modified</button>
-            <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile('2','8')"><i class="fa fa-play"></i> Noise</button>
+            <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile('1','6')"><i class="fa fa-play"></i> Original</button>
+            <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile('1','7')"><i class="fa fa-play"></i> Modified</button>
+            <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile('1','8')"><i class="fa fa-play"></i> Noise</button>
             
             <!-- Player -->
             <div class="card" id="player"> 
@@ -200,7 +200,6 @@
           </ul>
         
       <!--<br>
-
       <div class="row">
           <div class="col-sm-4">
               <img src="images/brainy.png" class="img-fluid" alt="Responsive image">
@@ -515,6 +514,90 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col"><h4>Original</h4></th>
+                        <th scope="col"><h4>Modified</h4></th>
+                        <th scope="col"><h4>Noise</h4></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><h4>Speech</h4></th>
+                        <td> 
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('0', '1')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('0', '2')"><i class="fa fa-play"></i> Modified</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('0', '3')"><i class="fa fa-play"></i> Noise</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><h4>Speech</h4></th>
+                     <td> 
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('4')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('5')"><i class="fa fa-play"></i> Modified</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('6')"><i class="fa fa-play"></i> Noise</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><h4>Birds</h4></th>
+                        <td> 
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('7')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('8')"><i class="fa fa-play"></i> Modified</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('9')"><i class="fa fa-play"></i> Noise</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><h4>Music</h4></th>
+                     <td> 
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('10')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('11')"><i class="fa fa-play"></i> Modified</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('12')"><i class="fa fa-play"></i> Noise</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                 <!-- Player -->
+                <div class="card" id="player2"> 
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <div class="col-12" style="min-height: 60px;">
+                                <span id="typed2" class="m-0" style="font-variant:small-caps;"></span>
+                            </div>
+                        </h4>
+                        <hr>
+                        
+                        <div id="waveform2"></div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="row justify-content-between;" style="align-items: center">            
+                            <div style="margin-left:auto; padding-right:15px;">
+                                <button type="button" class="btn btn-md rgba-red-strong" onclick="stopFile2();"><i class="fa fa-stop"></i> Stop</button>
+                            </div>                
+                        </div>
+                    </div>
+                </div>
+                <!-- Player End -->
               </div>
             </div>
 
@@ -674,13 +757,14 @@
         interact: false,
         barWidth: 3,
         progressColor: '#f7f7f7',
-        /*plugins: [
-            WaveSurfer.spectrogram.create({
-                wavesurfer: wavesurfer,
-                container: "#wave-spectrogram"
-            })
-        ]*/
-        
+    });
+
+    var wavesurfer2 = WaveSurfer.create({
+        container: '#waveform2',
+        waveColor: '#82b1ff',
+        interact: false,
+        barWidth: 3,
+        progressColor: '#f7f7f7',
     });
     
     var options = {
@@ -688,6 +772,7 @@
             showCursor: false,
     }        
     var typedObj = new Typed("#typed", options);
+    var typedObj2 = new Typed("#typed2", options);
     var currentCardNumber = -1;
     var currentId = -1;
     
@@ -696,19 +781,16 @@
     <script>
     
     $(function() {
-//         $('#spectrums').hide();
         $('#player').hide();
+        $('#player2').hide();
     });
-
     function playFile(cardNumber, id) {
         currentCardNumber = cardNumber;
         currentId = id;
         
         wavesurfer.stop();
-
         $('#player').show(500,function() {
             wavesurfer.load('songs/'+settings[currentId]["file"]);
-
         });
                     
         wavesurfer.on('ready', function () {           
@@ -717,52 +799,23 @@
             typedObj.reset();
             wavesurfer.play();  
         });
-        
-//         // Load Images
-//         $('#spectrum').find('img').remove();
-//         //$('#spectrum_1').find('img').remove();
-//         $('#spectrum_noise').find('img').remove();
-// 
-//         
-//         var counter = 0;
-//         for(var id in settings){
-//             if(settings[id]["group"] == currentCardNumber){
-//                 if(settings[id]["type"] == "original"){
-//                     $('#spectrum').append('<img id="spectrumToggle" data-spec-type="'+settings[id]["type"]+'" width="100%" onclick="toggleSpectrum()" src="img/spectra/'+settings[id]["file"]+'.png" />');
-//                 }
-//                 
-//                 if(settings[id]["type"] == "noise"){
-//                     $('#spectrum_noise').append('<img width="100%" src="img/spectra/'+settings[id]["file"]+'.png" />');
-//                 }
-//             }
-//         }
-
-        
     }
-    
-//     function toggleSpectrum(){
-// 
-//         var a = $('#spectrumToggle').data('spec-type');
-//         if(a == "original"){
-//             for(var id in settings){
-//                 if(settings[id]["group"] == currentCardNumber && settings[id]["type"] == "modified"){  
-//                     $('#spectrumToggle').attr('src', 'img/spectra/'+settings[id]["file"]+'.png');
-//                     $('#figcaption_toggle').text("Modified");
-//                 }
-//             }
-//             
-//             $('#spectrumToggle').data('spec-type', "modified"); //setter
-//         }
-//         else{
-//             for(var id in settings){
-//                 if(settings[id]["group"] == currentCardNumber && settings[id]["type"] == "original"){  
-//                     $('#spectrumToggle').attr('src', 'img/spectra/'+settings[id]["file"]+'.png');
-//                     $('#figcaption_toggle').text("Original");
-//                 }
-//             }
-//             $('#spectrumToggle').data('spec-type', "original"); //setter
-//         }
-//     }
+
+    function playFile2(cardNumber, id) {
+        currentId = id;
+        
+        wavesurfer.stop();
+        $('#player2').show(500,function() {
+            wavesurfer2.load('songs/'+settings[currentId]["file"]);
+        });
+                    
+        wavesurfer2.on('ready', function () {           
+            typedObj2.strings = [settings[currentId]["song_text"]];
+            typedObj2.typeSpeed = settings[currentId]["type_speed"];
+            typedObj2.reset();
+            wavesurfer2.play();  
+        });
+    }
     
     function stopFile(){
         wavesurfer.stop();
@@ -770,16 +823,15 @@
         typedObj.reset(false);
         //$('#spectrums').hide(500);
         $('#player').hide(500);
-
     }
-    
-/*    function showHideSpectrogram(){
-        $('#spectrums').toggle(100,function() {
-            $('html, body').animate({
-                scrollTop: $("#spectrums").offset().top
-            }, 500);
-        });
-    }  */  
+
+    function stopFile2(){
+        wavesurfer2.stop();
+        wavesurfer2.empty();
+        typedObj2.reset(false);
+        //$('#spectrums').hide(500);
+        $('#player2').hide(500);
+    }
 
     </script>  
 </body>

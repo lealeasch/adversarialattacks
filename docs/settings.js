@@ -1,6 +1,6 @@
 var settings = [
     {
-        file: "music.wav",
+        file: "TV_m.wav",
         song_text: "ALAN ^2000 A ^1000 NINE ^1500 MONTH ^2000 UNCERTAIN",
         type_speed: 10,
         type: "original",
@@ -8,7 +8,7 @@ var settings = [
 
     },
     {
-        file: "music_m.wav",
+        file: "TV_m.wav",
         song_text: "^1000ACTIVATE  ^2000EMERGENCY ^1500 BREAK  AND ^2000 LOCK  ALL  DOORS",
         type_speed: 10,
         type: "modified",
@@ -16,7 +16,7 @@ var settings = [
 
     },
     {
-        file: "music_diff.wav",
+        file: "TV_m.wav",
         song_text: "",
         type_speed: 10,
         type: "noise",
