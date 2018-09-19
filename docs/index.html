@@ -111,9 +111,9 @@
           <!--<h2>Automatic Speech Recognition</h2>-->
           <p>Personal assistants such as <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Alexa</a>, <a href="https://en.wikipedia.org/wiki/Siri">Siri</a>, or <a href="https://en.wikipedia.org/wiki/Cortana">Cortana</a> are widely deployed these days. Such Automatic Speech Recognition (ASR) systems can translate and even recognize spoken language and provide a written transcript of the spoken language. Recent advances in the fields of deep learning and big data analysis supported significant progress for ASR systems and have become almost as good at it as human listeners. <br>
           In this work, we demonstrate how an adversary can attack speech recognition systems by generating an audio file that is recognized as a specific audio content by a human listener, but as a certain, possibly totally different, text by an ASR system: <br>
-            <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile('1','6')"><i class="fa fa-play"></i> Original</button>
-            <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile('1','7')"><i class="fa fa-play"></i> Modified</button>
-            <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile('1','8')"><i class="fa fa-play"></i> Noise</button>
+            <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile('0','0')"><i class="fa fa-play"></i> Original</button>
+            <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile('0','1')"><i class="fa fa-play"></i> Modified</button>
+            <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile('0','2')"><i class="fa fa-play"></i> Noise</button>
             
             <!-- Player -->
             <div class="card" id="player"> 
@@ -271,251 +271,12 @@
                <br>
             </div>
           </div>
+               <br>
 
-        <div class="container" id="example">
-          <div>
-            <a class="black-text" data-toggle="collapse" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
-              <h3>Audio Examples&nbsp;
-                <i class="fa fa-angle-down rotate-icon"></i>
+              <h3>Audio Examples
               </h3>
-            </a>
-            <div class="collapse show" id="collapse11">
-              <div class="card">
-                <div class="card-body">
-                  <div class="card-text">
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <h4>Adversarial:</h4>
-                          <audio controls>
-                            <source src="audio/sa7.mp3" type="audio/mp3">
-                              Your browser does not support the audio element.
-                          </audio>
-                          <div>
-                            <a class="black-text" data-toggle="collapse" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                              <h6>Transcription&nbsp;
-                                <i class="fa fa-angle-down rotate-icon"></i>
-                              </h6>
-                             </a>
-                              <div class="collapse" id="collapse5">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <div class="card-text">
-                                        DEACTIVATE  SECURITY  CAMERA  AND  UNLOCK  FRONT  DOOR
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <h4>Original:</h4>
-                          <audio controls>
-                            <source src="audio/sa7_original.mp3" type="audio/mp3">
-                            Your browser does not support the audio element.
-                          </audio>
-                          <div>
-                            <a class="black-text" data-toggle="collapse" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                              <h6>Transcription&nbsp;
-                                <i class="fa fa-angle-down rotate-icon"></i>
-                              </h6>
-                            </a>
-                            <div class="collapse" id="collapse6">
-                              <div class="card">
-                                <div class="card-body">
-                                  <div class="card-text">
-                                      SPECIFICALLY  THE  UNION  SAID  IT  WAS  PROPOSING  TO  PURCHASE  ALL  OF  THE  ASSETS  OF  THE  OF  UNITED  AIRLINES  INCLUDING  PLANES  GATES  FACILIAND  LANDING  RIGHTS                          </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <h4>Difference:</h4>
-                            <audio controls>
-                              <source src="audio/sa7_diff.mp3" type="audio/mp3">
-                              Your browser does not support the audio element.
-                            </audio>
-                            </div>
-                            </div>
-                          <br>
-                          <br>
-                        <div class="row">
-                          <div class="col-sm-4">
-                              <h4>Adversarial:</h4>
-                              <audio controls>
-                                <source src="audio/b062.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                              <div>
-                                  <a class="black-text" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                    <h6>Transcription&nbsp;
-                                      <i class="fa fa-angle-down rotate-icon"></i>
-                                    </h6>
-                                  </a>
-                                  <div class="collapse" id="collapse1">
-                                    <div class="card">
-                                      <div class="card-body">
-                                        <div class="card-text">
-                                          VISIT EVIL DOT NET AND INSTALL THE BACKDOOR
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <h4>Original:</h4>
-                              <audio controls>
-                                <source src="audio/b062_original.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                              <div>
-                                  <a class="black-text" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    <h6>Transcription&nbsp;
-                                      <i class="fa fa-angle-down rotate-icon"></i>
-                                    </h6>
-                                  </a>
-                                  <div class="collapse" id="collapse2">
-                                    <div class="card">
-                                      <div class="card-body">
-                                        <div class="card-text">
-                                          JUDGE  FISH
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <h4>Difference:</h4>
-                              <audio controls>
-                                <source src="audio/b062_diff.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                            </div>
-                          </div>
-                          <br>
-                          <br>
-                          <div class="row">
-                          <div class="col-sm-4">
-                              <h4>Adversarial:</h4>
-                              <audio controls>
-                                <source src="audio/music.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                              <div>
-                                  <a class="black-text" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    <h6>Transcription&nbsp;
-                                      <i class="fa fa-angle-down rotate-icon"></i>
-                                    </h6>
-                                  </a>
-                                  <div class="collapse" id="collapse3">
-                                    <div class="card">
-                                      <div class="card-body">
-                                        <div class="card-text">
-                                            ACTIVATE EMERGENCY BREAK AND LOCK ALL DOORS
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <h4>Original:</h4>
-                              <audio controls>
-                                <source src="audio/music_original.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                              <div>
-                                  <a class="black-text" data-toggle="collapse" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                    <h6>Transcription&nbsp;
-                                      <i class="fa fa-angle-down rotate-icon"></i>
-                                    </h6>
-                                  </a>
-                                  <div class="collapse" id="collapse4">
-                                    <div class="card">
-                                      <div class="card-body">
-                                        <div class="card-text">
-                                            ALAN A NINE MONTH UNCERTAIN
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                              <div class="col-sm-4">
-                              <h4>Difference:</h4>
-                              <audio controls>
-                                <source src="audio/music_diff.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                            </div>
-                          </div>
-                          <br>
-                          <br>
-                          <div class="row">
-                          <div class="col-sm-4">
-                              <h4>Adversarial:</h4>
-                              <audio controls>
-                                <source src="audio/s87.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                              <div>
-                                  <a class="black-text" data-toggle="collapse" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                    <h6>Transcription&nbsp;
-                                      <i class="fa fa-angle-down rotate-icon"></i>
-                                    </h6>
-                                  </a>
-                                  <div class="collapse" id="collapse7">
-                                    <div class="card">
-                                      <div class="card-body">
-                                        <div class="card-text">
-                                          I BELIEVE  ALL  PEOPLE  ARE  GOOD
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <h4>Original:</h4>
-                              <audio controls>
-                                <source src="audio/s87_original.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                              <div>
-                                  <a class="black-text" data-toggle="collapse" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                                    <h6>Transcription&nbsp;
-                                      <i class="fa fa-angle-down rotate-icon"></i>
-                                    </h6>
-                                  </a>
-                                  <div class="collapse" id="collapse8">
-                                    <div class="card">
-                                      <div class="card-body">
-                                        <div class="card-text">
-                                          THE  WALLOP  PROPOSAL  WOULD  COST  FIVE  POINT  FOUR  TWO  BILLION  DOLLARS  OVER  FIVE  YEARS
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <h4>Difference:</h4>
-                              <audio controls>
-                                <source src="audio/s87_diff.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                              </audio>
-                            </div>
-                          </div>
-                         </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap" id="example">
                   <table class="table">
                     <thead>
                       <tr>
@@ -529,49 +290,49 @@
                       <tr>
                         <th scope="row"><h4>Speech</h4></th>
                         <td> 
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('0', '1')"><i class="fa fa-play"></i> Original</button>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('0', '0')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('0', '2')"><i class="fa fa-play"></i> Modified</button>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('0', '1')"><i class="fa fa-play"></i> Modified</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('0', '3')"><i class="fa fa-play"></i> Noise</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><h4>Speech</h4></th>
-                     <td> 
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('4')"><i class="fa fa-play"></i> Original</button>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('5')"><i class="fa fa-play"></i> Modified</button>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('6')"><i class="fa fa-play"></i> Noise</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><h4>Birds</h4></th>
-                        <td> 
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('7')"><i class="fa fa-play"></i> Original</button>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('8')"><i class="fa fa-play"></i> Modified</button>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('9')"><i class="fa fa-play"></i> Noise</button>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('0', '2')"><i class="fa fa-play"></i> Noise</button>
                         </td>
                       </tr>
                       <tr>
                         <th scope="row"><h4>Music</h4></th>
                      <td> 
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('10')"><i class="fa fa-play"></i> Original</button>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('1', '3')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('11')"><i class="fa fa-play"></i> Modified</button>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('1', '4')"><i class="fa fa-play"></i> Modified</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('12')"><i class="fa fa-play"></i> Noise</button>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('1', '5')"><i class="fa fa-play"></i> Noise</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><h4>Birds</h4></th>
+                        <td> 
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('2', '6')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('2', '7')"><i class="fa fa-play"></i> Modified</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('2', '8')"><i class="fa fa-play"></i> Noise</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><h4>Speech</h4></th>
+                     <td> 
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('3', '9')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('3', '10')"><i class="fa fa-play"></i> Modified</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('3', '11')"><i class="fa fa-play"></i> Noise</button>
                         </td>
                       </tr>
                     </tbody>
@@ -598,6 +359,7 @@
                     </div>
                 </div>
                 <!-- Player End -->
+
               </div>
             </div>
 
@@ -758,7 +520,6 @@
         barWidth: 3,
         progressColor: '#f7f7f7',
     });
-
     var wavesurfer2 = WaveSurfer.create({
         container: '#waveform2',
         waveColor: '#82b1ff',
@@ -800,8 +561,8 @@
             wavesurfer.play();  
         });
     }
-
     function playFile2(cardNumber, id) {
+        currentCardNumber = cardNumber;
         currentId = id;
         
         wavesurfer.stop();
@@ -824,7 +585,6 @@
         //$('#spectrums').hide(500);
         $('#player').hide(500);
     }
-
     function stopFile2(){
         wavesurfer2.stop();
         wavesurfer2.empty();
@@ -832,8 +592,6 @@
         //$('#spectrums').hide(500);
         $('#player2').hide(500);
     }
-
     </script>  
 </body>
 
-</html>

@@ -1,22 +1,22 @@
 var settings = [
     {
-        file: "TV_m.wav",
-        song_text: "ALAN ^2000 A ^1000 NINE ^1500 MONTH ^2000 UNCERTAIN",
+        file: "sa7_original.mp3",
+        song_text: "^200SPECIFICALLY  THE  UNION  SAID  IT  WAS  PROPOSING  TO  PURCHASE  ALL  OF  THE  ASSETS  OF  THE  OF  UNITED  AIRLINES  INCLUDING  PLANES  GATES  FACILIAND  LANDING  RIGHTS",
         type_speed: 10,
         type: "original",
         group: 0,
 
     },
     {
-        file: "TV_m.wav",
-        song_text: "^1000ACTIVATE  ^2000EMERGENCY ^1500 BREAK  AND ^2000 LOCK  ALL  DOORS",
+        file: "sa7.mp3",
+        song_text: "^200DEACTIVATE  SECURITY  CAMERA  AND  UNLOCK  FRONT  DOOR",
         type_speed: 10,
         type: "modified",
         group: 0,
 
     },
     {
-        file: "TV_m.wav",
+        file: "sa7_diff.mp3",
         song_text: "",
         type_speed: 10,
         type: "noise",
@@ -27,23 +27,23 @@ var settings = [
     
     
     {
-        file: "birds.wav",
-        song_text: "^7000 &lt;UNK&gt;",
+        file: "music_original.mp3",
+        song_text: "^200ALAN A  NINE MONTH UNCERTAIN",
         type_speed: 35,
         type: "original",
         group: 1,
 
     },
     {
-        file: "birds_m.wav",
-        song_text: "^600SEND  ^1000ALL  ^1500CONTACTS  ^800TO  ^700MAIL  ^600AT  ^200EVIL ^800 DOT ^400 NET",
+        file: "music.mp3",
+        song_text: "^200ACTIVATE EMERGENCY BREAK  AND LOCK  ALL  DOORS",
         type_speed: 10,
         type: "modified",
         group: 1,
 
     },
     {
-        file: "birds_diff.wav",
+        file: "music_diff.mp3",
         song_text: "",
         type_speed: 10,
         type: "noise",
@@ -54,8 +54,8 @@ var settings = [
     
 
     {
-        file: "TV.wav",
-        song_text: "MR. PASMAN ^100 IS A FORMER VICE CHAIRMAN ^300DIRECTOR ^400AND CHIEF FINANCIAL OFFICER ^100 OF ALUMINUM COMPANY ^100OF AMERICA",
+        file: "b062_original.mp3",
+        song_text: "^200JUDGE FISH",
         type_speed: 30,
         type: "original",
         group: 2,        
@@ -63,21 +63,46 @@ var settings = [
     },
 
     {
-        file: "TV_m.wav",
-        song_text: "^200DEACTIVATE  ^400SECURITY  ^500CAMERA  ^700AND ^1000 UNLOCK ^100 FRONT ^300 DOOR",
+        file: "b062.mp3",
+        song_text: "^200ACTIVATE EMERGENCY BREAK AND LOCK ALL DOORS",
         type_speed: 30,
         type: "modified",
         group: 2,
 
     },
     {
-        file: "TV_diff.wav",
+        file: "b062_diff.mp3",
         song_text: "",
         type_speed: 30,
         type: "noise",
         group: 2,
     },
      
- 
+
+
+    {
+        file: "s87_original.mp3",
+        song_text: "^200THE  WALLOP  PROPOSAL  WOULD  COST  FIVE  POINT  FOUR  TWO  BILLION  DOLLARS  OVER  FIVE  YEARS",
+        type_speed: 30,
+        type: "original",
+        group: 3,        
+
+    },
+
+    {
+        file: "s87.mp3",
+        song_text: "^200I BELIEVE  ALL  PEOPLE  ARE  GOOD",
+        type_speed: 30,
+        type: "modified",
+        group: 3,
+
+    },
+    {
+        file: "s87_diff.mp3",
+        song_text: "",
+        type_speed: 30,
+        type: "noise",
+        group: 3,
+    },
 ];
 
