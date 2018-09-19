@@ -790,7 +790,7 @@
         
         wavesurfer.stop();
         $('#player').show(500,function() {
-            wavesurfer.load('songs/'+settings[currentId]["file"]);
+            wavesurfer.load('audio/'+settings[currentId]["file"]);
         });
                     
         wavesurfer.on('ready', function () {           
@@ -806,7 +806,7 @@
         
         wavesurfer.stop();
         $('#player2').show(500,function() {
-            wavesurfer2.load('songs/'+settings[currentId]["file"]);
+            wavesurfer2.load('audio/'+settings[currentId]["file"]);
         });
                     
         wavesurfer2.on('ready', function () {           
