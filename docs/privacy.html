@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Adverarial Attacks</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PSM Comparison"/>
+  <meta name="keywords" content="Adverarial Attacks, Automatic Speech Recognition, Deep Neural Networks"/>
+  <meta name="author" content="Lea Schönherr">
+  <link href="css/fontawesome-all.min.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/mdb.min.css" rel="stylesheet" media="screen">
+  <link href="css/style.min.css" rel="stylesheet" media="screen">
+  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
+  <link rel="manifest" href="ico/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  <header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
+    <div class="container">
+        <a class="navbar-brand smooth-scroll" href="./index.html#title">Adversarial Attacks</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#intro">Introduction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#systems">ASR Systems</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#psycho">Psychoacoustics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#attack">Attack</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html#example">Examples</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#paper">Paper</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#faq">FAQ</a>
+            </li>
+          </ul>
+      </div>
+  </div>
+    </nav>
+  </header>
+
+<div class="pt-5 mx-lg-5">
+    <div class="container" id="privacy">
+
+      <br>
+      <h1 class="display-4">Privacy</h1>
+      <hr>
+
+      <p>This Privacy Statement is designed to tell you about our practices regarding collection, use and disclosure of information
+        that you may provide via this site. Please be sure to read this entire Privacy Statement before using or submitting
+        information to this site.
+      </p>
+
+      <br>
+      <h2> Consent</h2>
+
+      <p>By using this site, you agree with the terms of this Privacy Statement. Whenever you submit information via this site,
+        you consent to the collection, use, and disclosure of that information in accordance with this Privacy Statement.
+      </p>
+
+      <br>
+      <h2>Personal data</h2>
+
+      <p>Currently we collect and hold your personal data if you email us via one of the contact addresses on this Site. You can use this website without divulging any personal information. Further, we collect general connection data in the log files of server. The collected data can include the browser type, operation system, access data and time, and the IP address of the client. The purpose of this is to provide a best possible delivery of the webpage and to protect the system against possible attacks. The data are held for a period of a maximum of two weeks and are stored separately from other personal data.
+      </p>
+
+      <br>
+      <h2>Voluntary information</h2>
+
+      <p>We may occasionally ask for further information about you to enable us to better provide you with appropriate information.
+        You may at any time request that this information be removed from our database by writing to <a href="mailto:lea.schoenherr@rub.de" style="text-decoration: none">lea.schoenherr@rub.de</a>. Users may find out what personal information we hold about themselves on our database at any time, by writing to the above address.</p>
+
+      <br>
+
+      <h2>Links</h2>
+
+      <p>Where www.adversarial-attacks.net contains links to other websites, we are not responsible for the privacy practices or content
+        of other such sites. We encourage users to read the privacy statements of each site they link to that may collect
+        personal data.</p>
+
+      <br>
+      <h2>Contact</h2>
+
+      <p>The Site is owned and operated by Lea Sch&ouml;nherr. If you have any questions, comments, or concerns about this Privacy Statement or the information practices of this site, please contact us:</p>
+
+      <p>
+        Ruhr University Bochum
+        <br> Cognitive Signal Processing Group
+        <br> Universit&auml;tsstrasse 150
+        <br> ID 2 / 330
+        <br> 44780 Bochum / Germany
+        <br>
+
+        <br> Phone: (+49) (0) 234 32 - 22496 (Secretary's office)
+        <br> Fax: (+49) (0) 234 32 - 14165
+        <br> E-mail:
+        <a href="mailto:lea.schoenherr@rub.de" style="text-decoration: none">lea.schoenherr@rub.de</a>
+      </p>
+
+      <br>
+      <h2>Changes</h2>
+
+      <p>Please accept this Privacy Statement as current. We reserve the right to change, modify or update this statement at
+        any time without notice</p>
+
+    </div>
+
+  </div>
+
+<!-- Footer -->
+  <footer class="page-footer font-small elegant-color-dark pt-4 mt-4">
+    <div class="container">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h5 class="text-uppercase">Adversarial Attacks</h5>
+            <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa<br>
+            Ruhr-Universit&auml;t Bochum</p>
+        </div>
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <div class="col-md-6 mb-md-0 mb-3">
+          <h5 class="text-uppercase"><a href="./contact.html">Contact</a></h5>
+          <h5 class="text-uppercase"><a href="./privacy.html">Privacy</a></h5>
+        </div>
+      </div><!-- end row-->
+    </div><!-- end container-fluid-->
+  </div><!-- end container -->
+  </footer>
+<!-- Footer -->
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/mdb.min.js"></script>
+  <script>
+    $('.navbar-collapse a').click(function () {
+      $(".navbar-collapse").collapse('hide');
+    });
+  </script>
+  <script>
+    $(".smooth-scroll").on('click', 'a', function (event) {
+      event.preventDefault();
+      var elAttr = $(this).attr('href');
+      var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
+      var fixedTop = $('.navbar.fixed-top');
+      if (fixedTop && fixedTop.length) {
+        offset = fixedTop.outerHeight();
+      }
+      $('body,html').animate({
+        //scrollTop: $(elAttr).offset().top - offset
+        scrollTop: $(elAttr).offset().top - 56
+      }, 700);
+    });
+  </script>
+</body>
+
+</html>

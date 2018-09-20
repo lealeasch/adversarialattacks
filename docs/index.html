@@ -12,7 +12,6 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/mdb.min.css" rel="stylesheet" media="screen">
   <link href="css/style.min.css" rel="stylesheet" media="screen">
-
   <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
@@ -35,47 +34,47 @@
 <body>
   <header>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
-      <div class="smooth-scroll">
-        <a class="navbar-brand smooth-scroll" href="#title">Adversarial Attacks</a>
-      </div>
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
+      <div class="container">
+        <a class="navbar-brand smooth-scroll" href="./index.html#title">Adversarial Attacks</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav mr-auto smooth-scroll">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#intro">Introduction</a>
+              <a class="nav-link" href="./index.html#intro">Introduction</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#systems">ASR Systems</a>
+              <a class="nav-link" href="./index.html#systems">ASR Systems</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#psycho">Psychoacoustics</a>
+              <a class="nav-link" href="./index.html#psycho">Psychoacoustics</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#attack">Attack</a>
+              <a class="nav-link" href="./index.html#attack">Attack</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#example">Examples</a>
+                <a class="nav-link" href="./index.html#example">Examples</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#paper">Paper</a>
+              <a class="nav-link" href="./index.html#paper">Paper</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#faq">FAQ</a>
+              <a class="nav-link" href="./index.html#faq">FAQ</a>
             </li>
           </ul>
       </div>
+    </div>
     </nav>
   </header>
 
-  <br>
+
 
   <div class="pt-5 mx-lg-5">
     <div class="container" id="title">
-      <div class="jumbotron">
+      <div class="jumbotron" style="padding: 1em;">
         <div class="row">
           <div class="col-sm-2">
             <img src="images/attacker.png" width="120" alt="Attacker">
@@ -84,7 +83,10 @@
             <h1 class="h1-responsive">Adversarial Attacks Against ASR Systems via Psychoacoustic Hiding</h1>
             <hr class="my-2">
             <p>Lea Sch&ouml;nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa</p>
-            <p> Ruhr-Universit&auml;t Bochum</p>
+            <p>Ruhr-Universit&auml;t Bochum</p>
+            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding-left: 0px;">
+            <a href="https://arxiv.org/abs/1808.05665" target="_blank" class="btn btn-primary btn-lg"><i class="far fa-file-pdf"></i> <span>Read the paper</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -114,40 +116,38 @@
             <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile('0','0')"><i class="fa fa-play"></i> Original</button>
             <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile('0','1')"><i class="fa fa-play"></i> Modified</button>
             <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile('0','2')"><i class="fa fa-play"></i> Noise</button>
-            
+
             <!-- Player -->
-            <div class="card" id="player"> 
+            <div class="card" id="player">
                 <div class="card-body">
-                    <h4 class="card-title">
-                        <div class="col-12" style="min-height: 60px;">
-                            <span id="typed" class="m-0" style="font-variant:small-caps;"></span>
-                        </div>
-                    </h4>
+                    <div class="col-12" style="min-height: 60px;">
+                      <h4 class="card-title">&nbsp;
+                          <span id="typed" class="m-0" style="font-variant:small-caps;"></span>
+                      </h4>
+                    </div>
                     <hr>
-                    
+
                     <div id="waveform"></div>
                 </div>
                 <div class="card-footer text-center">
-                    <div class="row justify-content-between;" style="align-items: center">            
+                    <div class="row justify-content-between;" style="align-items: center">
                         <div style="margin-left:auto; padding-right:15px;">
                             <button type="button" class="btn btn-md rgba-red-strong" onclick="stopFile();"><i class="fa fa-stop"></i> Stop</button>
-                        </div>                
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Player End -->
-                
+
           <br>
-          More <a href="#example">audio examples</a> ca be found at the end of the articel. <br>
+          <p>More <a href="#example">audio examples</a> ca be found at the end of the articel. <br>
           These so-called <em>adversarial examples</em> exploit the fact that ASR systems based on machine learning have some wiggle room that an attacker can exploit: by adding some distortions, we can mislead the algorithm into recognizing a different sentence. The main contribution of our work is to demonstrate that we can generate the noise in such a way that it is almost completely hidden from human listeners. For this purpose, we take advantage of a <em>psychoacoustic model of human hearing</em>, describing the masking effects of human perception, which is also used for MP3 decoding.</p>
         </div>
         <div class="col-sm-4">
           <img src="images/kleine_omi.png" class="img-fluid" alt="Kleine Omi">
         </div>
       </div>
-      
-    
-    
+
       <br>
       <br>
 
@@ -215,7 +215,7 @@
     <br>
 
     <div class="container" id="psycho">
-        <h1 class="display-4">Psycho<wbr>acoustics</h1>
+        <h1 class="display-4" id="psychoacoustics-smaller">Psychoacoustics</h1>
         <hr>
   
         <br>
@@ -266,7 +266,7 @@
           <div class="row">
             <div class="col-sm-10">
               <h2>Results</h2>
-              <p>In general it is possible to hide any transcription in any audio file with a success rate of nearly 100 %. <br>
+              <p>In general it is possible to hide any transcription in any audio file with a success rate of nearly 100&nbsp;%. <br>
                As an example, we have some audio clips, which are modified with the described algorithm:
                <br>
             </div>
@@ -281,15 +281,15 @@
                     <thead>
                       <tr>
                         <th scope="col"></th>
-                        <th scope="col"><h4>Original</h4></th>
-                        <th scope="col"><h4>Modified</h4></th>
-                        <th scope="col"><h4>Noise</h4></th>
+                        <th scope="col" class="janheadline">Original</th>
+                        <th scope="col" class="janheadline">Modified</th>
+                        <th scope="col" class="janheadline">Noise</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><h4>Speech</h4></th>
-                        <td> 
+                        <th scope="row" class="janheadline">Speech</th>
+                        <td>
                           <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('0', '0')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
@@ -300,8 +300,8 @@
                         </td>
                       </tr>
                       <tr>
-                        <th scope="row"><h4>Music</h4></th>
-                     <td> 
+                        <th scope="row" class="janheadline">Music</th>
+                     <td>
                           <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('1', '3')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
@@ -312,8 +312,8 @@
                         </td>
                       </tr>
                       <tr>
-                        <th scope="row"><h4>Birds</h4></th>
-                        <td> 
+                        <th scope="row" class="janheadline">Birds</th>
+                        <td>
                           <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('2', '6')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
@@ -324,8 +324,8 @@
                         </td>
                       </tr>
                       <tr>
-                        <th scope="row"><h4>Speech</h4></th>
-                     <td> 
+                        <th scope="row" class="janheadline">Speech</th>
+                     <td>
                           <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('3', '9')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
@@ -339,22 +339,22 @@
                   </table>
                 </div>
                  <!-- Player -->
-                <div class="card" id="player2"> 
+                <div class="card" id="player2">
                     <div class="card-body">
-                        <h4 class="card-title">
-                            <div class="col-12" style="min-height: 60px;">
-                                <span id="typed2" class="m-0" style="font-variant:small-caps;"></span>
-                            </div>
-                        </h4>
+                        <div class="col-12" style="min-height: 60px;">
+                            <h4 class="card-title">&nbsp;
+                              <span id="typed2" class="m-0" style="font-variant:small-caps;"></span>
+                            </h4>
+                        </div>
                         <hr>
-                        
+
                         <div id="waveform2"></div>
                     </div>
                     <div class="card-footer text-center">
-                        <div class="row justify-content-between;" style="align-items: center">            
+                        <div class="row justify-content-between;" style="align-items: center">
                             <div style="margin-left:auto; padding-right:15px;">
                                 <button type="button" class="btn btn-md rgba-red-strong" onclick="stopFile2();"><i class="fa fa-stop"></i> Stop</button>
-                            </div>                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -368,21 +368,25 @@
     <div class="container" id="paper">
         <h1 class="display-4">Technical Paper</h1>
         <hr>
-
       <div>
-        The paper is currently under submission for NDSS Symposium 2019. If you want to cite the <a href="https://arxiv.org/abs/1808.05665" target="_blank">paper</a>, please use the following BibTeX entry:
+        The paper is currently under submission for NDSS Symposium 2019.
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding-left: 0px;">
+          <a href="https://arxiv.org/abs/1808.05665" target="_blank" class="btn btn-primary btn-lg"><i class="far fa-file-pdf"></i> <span>Read the paper</span></a>
+        </div>
+        <br>
+        If you want to cite the <a href="https://arxiv.org/abs/1808.05665" target="_blank">paper</a>, please use the following BibTeX entry:
       </div>
 
       <br>
-      <pre class="code">@inproceedings{2018arXiv180805665S,
-    author = {Lea Sch{\"o}nherr, Katharina Kohls, Steffen Zeiler, Thorsten Holz, and Dorothea Kolossa},
+      <pre class="code" style="background-color: #f1f1f1">@article{schoenherr-18-hiding,
+    author = {Sch{\"o}nherr, Lea and Kohls, Katharina and Zeiler, Steffen and Holz, Thorsten and Kolossa, Dorothea},
     title = {Adversarial Attacks Against Automatic Speech Recognition Systems via Psychoacoustic Hiding},
     journal = {ArXiv e-prints},
-    year = {2018},
+    volume = {abs/1808.05665},
     month = aug,
+    year = {2018},
     url = {https://arxiv.org/abs/1808.05665}
-}
-      </pre>
+}</pre>
     </div>
 
     <br>
@@ -401,7 +405,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-text">
-                The presented attack is currently <em>not</em> deployed for over the air attacks. Also it is <em>not</em> tailored for an existing commercial product such as Alexa, Siri, or Cortana, but for the open source Kaldi speech recognition system. However, we think that such an attack, in general, is possible and in future studies, we want to show that the attack also works when the signal is played through a loudspeaker reaches the voice assistant through the air.
+                The presented attack is currently <em>not</em> optimized for over the air attacks. Also it is <em>not</em> tailored for an existing commercial product such as Alexa, Siri, or Cortana, but for the open source Kaldi speech recognition system. However, we think that such an attack, in general, is possible and in future studies, we want to show that the attack also works when the signal is played via a loudspeaker.
               </div>
             </div>
           </div>
@@ -420,7 +424,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-text">
-                During the development of a speech recognition, especially during the training of the neural network, developers need to consider the possibility of such attacks and adapt the training to not misrecognize adversarial audio input.
+                During the development of a speech recognition, especially during the training of the neural network, developers need to consider the possibility of such attacks and adapt the training to not misrecognize adversarial inputs.
               </div>
             </div>
           </div>
@@ -439,7 +443,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-text">
-                Voice assistant are often connected with online shopping or even smart home setups. Therefore, a possible attack might target the online order of goods without the knowledge of the owner or may control smart home devices, such as security cameras.
+                Voice assistants are often equipped with an online shopping feature or even connected to an entire smart home system. Therefore, a possible attack might target online shopping without the knowledge of the owner or may control smart home devices, such as security cameras.
               </div>
             </div>
           </div>
@@ -457,7 +461,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-text">
-                Definitely! Yes! We started to print shirts and underwear, as these were highly requested items in prior projects. In the near future, there will also be attacker-icon piercings for generic parts of your body, a series of smart casual apparel, and multi-functional can openers. Please be aware that we support fair trade production facilities and must charge an extra political-correctness fee of 23% of the original item price. Let's create a better world, together!
+                Definitely! Yes! We started to print shirts and underwear, as these were highly requested items in prior projects. In the near future, there will also be attacker-icon piercings for generic parts of your body, a series of smart casual apparel, and multi-functional can openers. Please be aware that we support fair trade production facilities and must charge an extra political-correctness fee of 23&nbsp;% of the original item price. Let's create a better world, together!
               </div>
             </div>
           </div>
@@ -465,8 +469,11 @@
       </div>
 
       <br>
+    </div>
 
+<!-- Footer -->
   <footer class="page-footer font-small elegant-color-dark pt-4 mt-4">
+    <div class="container">
     <div class="container-fluid text-center text-md-left">
       <div class="row">
         <div class="col-md-6 mt-md-0 mt-3">
@@ -476,22 +483,22 @@
         </div>
         <hr class="clearfix w-100 d-md-none pb-3">
         <div class="col-md-6 mb-md-0 mb-3">
-          <h5 class="text-uppercase"><a href="/contact.html">Contact</a></h5>
-          <h5 class="text-uppercase"><a href="/privacy.html">Privacy</a></h5>
+          <h5 class="text-uppercase"><a href="./contact.html">Contact</a></h5>
+          <h5 class="text-uppercase"><a href="./privacy.html">Privacy</a></h5>
         </div>
-      </div>
-    </div>
+      </div><!-- end row-->
+    </div><!-- end container-fluid-->
+  </div><!-- end container -->
   </footer>
-
+<!-- Footer -->
 
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/mdb.min.js"></script>
-  <script type="text/javascript" src="js/wavesurfer/wavesurfer.min.js"></script>
-  <!--<script type="text/javascript" src="js/wavesurfer/plugin/spectrogram.js"></script>-->
-  <script type="text/javascript" src="js/typed.js"></script>
-  <script type="text/javascript" src="settings.js"></script>  
+  <script src="js/wavesurfer/wavesurfer.min.js"></script>
+  <script src="js/typed.js"></script>
+  <script src="js/settings.js"></script>
   <script>
     $('.navbar-collapse a').click(function () {
       $(".navbar-collapse").collapse('hide');
@@ -527,20 +534,20 @@
         barWidth: 3,
         progressColor: '#f7f7f7',
     });
-    
+
     var options = {
             strings: [""],
             showCursor: false,
-    }        
+    }
     var typedObj = new Typed("#typed", options);
     var typedObj2 = new Typed("#typed2", options);
     var currentCardNumber = -1;
     var currentId = -1;
-    
+
     </script>
 
     <script>
-    
+
     $(function() {
         $('#player').hide();
         $('#player2').hide();
@@ -548,36 +555,36 @@
     function playFile(cardNumber, id) {
         currentCardNumber = cardNumber;
         currentId = id;
-        
+
         wavesurfer.stop();
         $('#player').show(500,function() {
             wavesurfer.load('audio/'+settings[currentId]["file"]);
         });
-                    
-        wavesurfer.on('ready', function () {           
+
+        wavesurfer.on('ready', function () {
             typedObj.strings = [settings[currentId]["song_text"]];
             typedObj.typeSpeed = settings[currentId]["type_speed"];
             typedObj.reset();
-            wavesurfer.play();  
+            wavesurfer.play();
         });
     }
     function playFile2(cardNumber, id) {
         currentCardNumber = cardNumber;
         currentId = id;
-        
+
         wavesurfer.stop();
         $('#player2').show(500,function() {
             wavesurfer2.load('audio/'+settings[currentId]["file"]);
         });
-                    
-        wavesurfer2.on('ready', function () {           
+
+        wavesurfer2.on('ready', function () {
             typedObj2.strings = [settings[currentId]["song_text"]];
             typedObj2.typeSpeed = settings[currentId]["type_speed"];
             typedObj2.reset();
-            wavesurfer2.play();  
+            wavesurfer2.play();
         });
     }
-    
+
     function stopFile(){
         wavesurfer.stop();
         wavesurfer.empty();
@@ -592,6 +599,6 @@
         //$('#spectrums').hide(500);
         $('#player2').hide(500);
     }
-    </script>  
+    </script>
 </body>
 

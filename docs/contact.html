@@ -2,148 +2,80 @@
 <html lang="en">
 
 <head>
-    <title>Adverarial Attacks</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <link href="css/style.min.css" rel="stylesheet">
-    <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
-        @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
-        figure.snip1390 {
-            font-family: 'Roboto', Arial, sans-serif;
-            position: relative;
-            float: left;
-            overflow: hidden;
-            margin: 10px 1%;
-            min-width: 230px;
-            max-width: 315px;
-            width: 100%;
-            color: #000000;
-            text-align: center;
-            font-size: 16px;
-            background-color: #4B515D;
-            padding: 30px;
-            #background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        figure.snip1390 *,
-        figure.snip1390 *:before,
-        figure.snip1390 *:after {
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            -webkit-transition: all 0.35s ease;
-            transition: all 0.35s ease;
-        }
-
-        figure.snip1390 figcaption {
-            width: 100%;
-        }
-
-        figure.snip1390 h2,
-        figure.snip1390 h4,
-        figure.snip1390 blockquote {
-            margin: 0;
-        }
-
-        figure.snip1390 h2,
-        figure.snip1390 h4 {
-            font-weight: 300;
-        }
-
-        figure.snip1390 h2 {
-            color: #ffffff;
-        }
-
-        figure.snip1390 h4 {
-            color: #a6a6a6;
-        }
-
-        figure.snip1390 blockquote {
-            font-size: 1em;
-            padding: 45px 20px 40px 50px;
-            margin-top: 30px;
-            background-color: #ffffff;
-            border-radius: 5px;
-            box-shadow: inset -1.4px -1.4px 2px rgba(0, 0, 0, 0.3);
-            #background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-            text-align: left;
-            position: relative;
-        }
-
-        figure.snip1390 blockquote:before {
-            font-family: 'FontAwesome';
-            content: "\201C";
-            position: absolute;
-            font-size: 70px;
-            opacity: 0.25;
-            font-style: normal;
-            top: 0px;
-            left: 20px;
-        }
-
-        figure.snip1390 .profile {
-            width: 130px;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.4);
-            margin-bottom: 10px;
-            border: solid 0px #A6A57A;
-        }
-    </style>
+  <title>Adverarial Attacks</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PSM Comparison"/>
+  <meta name="keywords" content="Adverarial Attacks, Automatic Speech Recognition, Deep Neural Networks"/>
+  <meta name="author" content="Lea Schönherr">
+  <link href="css/fontawesome-all.min.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/mdb.min.css" rel="stylesheet" media="screen">
+  <link href="css/style.min.css" rel="stylesheet" media="screen">
+  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
+  <link rel="manifest" href="ico/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
-    <header>
+  <header>
 
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
-            <a class="navbar-brand smooth-scroll" href="/index.html#title">Adversarial Attacks</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <!-- Left -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index.html#intro">Introduction</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index.html#systems">ASR Systems</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index.html#psycho">Psychoacoustics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index.html#attack">Attack</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index.html#example">Examples</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index.html#paper">Paper</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/index.html#faq">FAQ</a>
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark elegant-color-dark">
+    <div class="container">
+        <a class="navbar-brand smooth-scroll" href="./index.html#title">Adversarial Attacks</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#intro">Introduction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#systems">ASR Systems</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#psycho">Psychoacoustics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#attack">Attack</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html#example">Examples</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#paper">Paper</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html#faq">FAQ</a>
+            </li>
+          </ul>
+      </div>
+  </div>
+    </nav>
+  </header>
 
 <div class="pt-5 mx-lg-5">
   <div class="container" id="title">
         <br>
-        <div class="row d-flex justify-content-center">
-            <div class="col text-center col-md-auto">
-                <figure class="snip1390" style="min-width:300px;">
+        <div class="row justify-content-center">
+            <div class="text-center col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <figure class="snip1390">
                     <img src="media/schoenherr_short.jpg" alt="profile-sample3" class="profile" />
                     <figcaption>
                         <h2>Lea Sch&ouml;nherr</h2>
@@ -154,22 +86,21 @@
                             <a href="mailto:lea.schoenherr@rub.de" style="text-decoration: none">
                                 <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
                             </a>
-                            &nbsp
+                            &nbsp;
                             <a href="https://www.ruhr-uni-bochum.de/ika/mitarbeiter/schoenherr.htm" target="_blank">
                                 <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
                             </a>
-                            &nbsp
+                            &nbsp;
                             <a href="https://twitter.com/leaschnherr" target="_blank">
-                                <i class="fa fa-twitter fa-2x white-text" aria-hidden="true"></i>
+                                <i class="fab fa-twitter fa-2x white-text" aria-hidden="true"></i>
                             </a>
-                            
                         </p>
                     </figcaption>
                 </figure>
             </div>
 
-            <div class="col text-center col-md-auto" min-width=50000px>
-                <figure class="snip1390" style="min-width:300px;">
+            <div class="col text-center col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <figure class="snip1390">
                     <img src="media/kohls_short.jpg" alt="profile-sample3" class="profile" />
                     <figcaption>
                         <h2>Katharina Kohls</h2>
@@ -180,19 +111,17 @@
                                 <a href="mailto:katharina.kohls@rub.de" style="text-decoration: none">
                                     <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                                &nbsp
+                                &nbsp;
                                 <a href="http://infsec.rub.de/lehrstuhl/mitarbeiter/kohls/" target="_blank">
                                     <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                               
-                              
                             </p>
                     </figcaption>
                 </figure>
             </div>
-            
-            <div class="col text-center col-md-auto">
-                <figure class="snip1390" style="min-width:300px;">
+
+            <div class="col text-center col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <figure class="snip1390">
                     <img src="media/zeiler_short.jpg" alt="profile-sample3" class="profile" />
                     <figcaption>
                         <h2>Steffen Zeiler</h2>
@@ -203,18 +132,18 @@
                             <a href="mailto:steffen.zeiler@rub.de" style="text-decoration: none">
                                 <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
                             </a>
-                            &nbsp
+                            &nbsp;
                             <a href="https://www.ruhr-uni-bochum.de/ika/mitarbeiter/zeiler.htm" target="_blank">
                                 <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
                             </a>
-                            
+
                         </p>
                     </figcaption>
                 </figure>
             </div>
 
-            <div class="col text-center col-md-auto">
-                <figure class="snip1390" style="min-width:300px;">
+            <div class="col text-center col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <figure class="snip1390">
                     <img src="media/holz_short.jpg" alt="profile-sample3" class="profile" />
                     <figcaption>
                         <h2>Thorsten Holz</h2>
@@ -225,22 +154,22 @@
                                 <a href="mailto:thorsten.holz@rub.de" style="text-decoration: none">
                                     <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                                &nbsp
+                                &nbsp;
                                 <a href="http://syssec.rub.de/~tho/" target="_blank">
                                     <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                                &nbsp
+                                &nbsp;
                                 <a href="https://twitter.com/thorstenholz" target="_blank">
-                                    <i class="fa fa-twitter fa-2x white-text" aria-hidden="true"></i>
+                                    <i class="fab fa-twitter fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                                
+
                             </p>
                     </figcaption>
                 </figure>
             </div>
 
-            <div class="col text-center col-md-auto">
-                <figure class="snip1390" style="min-width:300px;">
+            <div class="col text-center col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <figure class="snip1390">
                     <img src="media/kolossa_short.jpg" alt="profile-sample3" class="profile" />
                     <figcaption>
                         <h2>Dorothea Kolossa</h2>
@@ -248,16 +177,16 @@
                         <p class="white-text">Ruhr-University Bochum<br>Cognitive Signal Processing Group</p>
                         <br>
                         <p class="card-text">
-                                <a href="mailto:dorothea.kolossa@rub.de"_blank"" style="text-decoration: none">
+                                <a href="mailto:dorothea.kolossa@rub.de" style="text-decoration: none">
                                     <i class="fa fa-envelope fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                                &nbsp
+                                &nbsp;
                                 <a href="https://www.ruhr-uni-bochum.de/ika/mitarbeiter/kolossa.htm" target="_blank">
                                     <i class="fa fa-address-card fa-2x white-text" aria-hidden="true"></i>
                                 </a>
-                                &nbsp
+                                &nbsp;
                                 <a href="https://twitter.com/DorotheaKolossa " target="_blank">
-                                    <i class="fa fa-twitter fa-2x white-text" aria-hidden="true"></i>
+                                    <i class="fab fa-twitter fa-2x white-text" aria-hidden="true"></i>
                                 </a>
                             </p>
                     </figcaption>
@@ -269,6 +198,7 @@
 
 <!-- Footer -->
   <footer class="page-footer font-small elegant-color-dark pt-4 mt-4">
+    <div class="container">
     <div class="container-fluid text-center text-md-left">
       <div class="row">
         <div class="col-md-6 mt-md-0 mt-3">
@@ -278,38 +208,39 @@
         </div>
         <hr class="clearfix w-100 d-md-none pb-3">
         <div class="col-md-6 mb-md-0 mb-3">
-          <h5 class="text-uppercase"><a href="/contact.html">Contact</a></h5>
-          <h5 class="text-uppercase"><a href="/privacy.html">Privacy</a></h5>
+          <h5 class="text-uppercase"><a href="./contact.html">Contact</a></h5>
+          <h5 class="text-uppercase"><a href="./privacy.html">Privacy</a></h5>
         </div>
-      </div>
-    </div>
+      </div><!-- end row-->
+    </div><!-- end container-fluid-->
+  </div><!-- end container -->
   </footer>
 <!-- Footer -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script>
-        $('.navbar-collapse a').click(function () {
-            $(".navbar-collapse").collapse('hide');
-        });
-    </script>
-    <script>
-        $(".smooth-scroll").on('click', 'a', function (event) {
-            event.preventDefault();
-            var elAttr = $(this).attr('href');
-            var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
-            var fixedTop = $('.navbar.fixed-top');
-            if (fixedTop && fixedTop.length) {
-                offset = fixedTop.outerHeight();
-            }
-            $('body,html').animate({
-                //scrollTop: $(elAttr).offset().top - offset
-                scrollTop: $(elAttr).offset().top - 56
-            }, 700);
-        });
-    </script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/mdb.min.js"></script>
+  <script>
+    $('.navbar-collapse a').click(function () {
+      $(".navbar-collapse").collapse('hide');
+    });
+  </script>
+  <script>
+    $(".smooth-scroll").on('click', 'a', function (event) {
+      event.preventDefault();
+      var elAttr = $(this).attr('href');
+      var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
+      var fixedTop = $('.navbar.fixed-top');
+      if (fixedTop && fixedTop.length) {
+        offset = fixedTop.outerHeight();
+      }
+      $('body,html').animate({
+        //scrollTop: $(elAttr).offset().top - offset
+        scrollTop: $(elAttr).offset().top - 56
+      }, 700);
+    });
+  </script>
 </body>
 
 </html>
