@@ -64,7 +64,7 @@ var settings = [
 
     {
         file: "b062.mp3",
-        song_text: "^200ACTIVATE EMERGENCY BREAK AND LOCK ALL DOORS",
+        song_text: "^200VISIT EVIL DOT NET AND INSTALL THE BACKDOOR",
         type_speed: 30,
         type: "modified",
         group: 2,
