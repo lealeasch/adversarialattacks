@@ -1,7 +1,7 @@
 var settings = [
     {
         file: "sa7_original.mp3",
-        song_text: "^200SPECIFICALLY  THE  UNION  SAID  IT  WAS  PROPOSING  TO  PURCHASE  ALL  OF  THE  ASSETS  OF  THE  OF  UNITED  AIRLINES  INCLUDING  PLANES  GATES  FACILIAND  LANDING  RIGHTS",
+        song_text: "^200SPECIFICALLY  THE  UNION  SAID  IT  WAS  PROPOSING  TO  PURCHASE  ALL  OF  THE  ASSETS  OF  THE  OF  UNITED  AIRLINES  INCLUDING  PLANES  GATES  FACILITIES AND LANDING  RIGHTS",
         type_speed: 30,
         type: "original",
         group: 0,
@@ -23,9 +23,6 @@ var settings = [
         group: 0,
 
     },
-    
-    
-    
     {
         file: "music_original.mp3",
         song_text: "^200ALAN A  NINE MONTH UNCERTAIN",
@@ -49,16 +46,13 @@ var settings = [
         type: "noise",
         group: 1,
 
-    },    
-
-    
-
+    },
     {
         file: "b062_original.mp3",
         song_text: "^200JUDGE FISH",
         type_speed: 30,
         type: "original",
-        group: 2,        
+        group: 2,
 
     },
 
@@ -77,18 +71,14 @@ var settings = [
         type: "noise",
         group: 2,
     },
-     
-
-
     {
         file: "s87_original.mp3",
         song_text: "^200THE  WALLOP  PROPOSAL  WOULD  COST  FIVE  POINT  FOUR  TWO  BILLION  DOLLARS  OVER  FIVE  YEARS",
         type_speed: 30,
         type: "original",
-        group: 3,        
+        group: 3,
 
     },
-
     {
         file: "s87.mp3",
         song_text: "^200I BELIEVE  ALL  PEOPLE  ARE  GOOD",
@@ -105,4 +95,3 @@ var settings = [
         group: 3,
     },
 ];
-

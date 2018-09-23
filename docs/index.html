@@ -107,17 +107,14 @@
           <!--<h2>Automatic Speech Recognition</h2>-->
           <p>Personal assistants such as <a href="https://en.wikipedia.org/wiki/Amazon_Alexa">Alexa</a>, <a href="https://en.wikipedia.org/wiki/Siri">Siri</a>, or <a href="https://en.wikipedia.org/wiki/Cortana">Cortana</a> are widely deployed these days. Such Automatic Speech Recognition (ASR) systems can translate and even recognize spoken language and provide a written transcript of the spoken language. Recent advances in the fields of deep learning and big data analysis supported significant progress for ASR systems and have become almost as good at it as human listeners. <br>
           In this work, we demonstrate how an adversary can attack speech recognition systems by generating an audio file that is recognized as a specific audio content by a human listener, but as a certain, possibly totally different, text by an ASR system: <br>
-            <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile('0','0')"><i class="fa fa-play"></i> Original</button>
-            <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile('0','1')"><i class="fa fa-play"></i> Modified</button>
-            <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile('0','2')"><i class="fa fa-play"></i> Noise</button>
-
+          <button type="button" class="btn rgba-green-strong" onclick="loadFile('0','0')"><i class="fa fa-play"></i> Original</button>
+          <button type="button" class="btn rgba-red-strong"   onclick="loadFile('0','1')"><i class="fa fa-play"></i> Modified</button>
+          <button type="button" class="btn rgba-grey-strong"  onclick="loadFile('0','2')"><i class="fa fa-play"></i> Noise</button>
             <!-- Player -->
             <div class="card" id="player">
                 <div class="card-body">
                     <div class="col-12" style="min-height: 60px;">
-                      <h4 class="card-title">&nbsp;
-                          <span id="typed" class="m-0" style="font-variant:small-caps;"></span>
-                      </h4>
+                      <h4 class="card-title"><span id="typed" class="m-0" style="font-variant:small-caps;"></span></h4>
                     </div>
                     <hr>
 
@@ -125,8 +122,11 @@
                 </div>
                 <div class="card-footer text-center">
                     <div class="row justify-content-between;" style="align-items: center">
+                        <div style="margin-right:auto; padding-left:15px;">
+                            <button type="button" id="playBtn" class="btn btn-md rgba-blue-strong" disabled onclick="playFile();"><i class="fa fa-play"></i> Play</button>
+                        </div>
                         <div style="margin-left:auto; padding-right:15px;">
-                            <button type="button" class="btn btn-md rgba-red-strong" onclick="stopFile();"><i class="fa fa-stop"></i> Stop</button>
+                            <button type="button" id="stopBtn" class="btn btn-md rgba-red-strong" disabled onclick="stopFile();"><i class="fa fa-stop"></i> Stop</button>
                         </div>
                     </div>
                 </div>
@@ -284,49 +284,49 @@
                       <tr>
                         <th scope="row" class="janheadline">Speech</th>
                         <td>
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('0', '0')"><i class="fa fa-play"></i> Original</button>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadFile2('0', '0')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('0', '1')"><i class="fa fa-play"></i> Modified</button>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadFile2('0', '1')"><i class="fa fa-play"></i> Modified</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('0', '2')"><i class="fa fa-play"></i> Noise</button>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadFile2('0', '2')"><i class="fa fa-play"></i> Noise</button>
                         </td>
                       </tr>
                       <tr>
                         <th scope="row" class="janheadline">Music</th>
                      <td>
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('1', '3')"><i class="fa fa-play"></i> Original</button>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadFile2('1', '3')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('1', '4')"><i class="fa fa-play"></i> Modified</button>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadFile2('1', '4')"><i class="fa fa-play"></i> Modified</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('1', '5')"><i class="fa fa-play"></i> Noise</button>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadFile2('1', '5')"><i class="fa fa-play"></i> Noise</button>
                         </td>
                       </tr>
                       <tr>
                         <th scope="row" class="janheadline">Birds</th>
                         <td>
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('2', '6')"><i class="fa fa-play"></i> Original</button>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadFile2('2', '6')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('2', '7')"><i class="fa fa-play"></i> Modified</button>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadFile2('2', '7')"><i class="fa fa-play"></i> Modified</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('2', '8')"><i class="fa fa-play"></i> Noise</button>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadFile2('2', '8')"><i class="fa fa-play"></i> Noise</button>
                         </td>
                       </tr>
                       <tr>
                         <th scope="row" class="janheadline">Speech</th>
                      <td>
-                          <button type="button" class="btn btn-md rgba-green-strong" onclick="playFile2('3', '9')"><i class="fa fa-play"></i> Original</button>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadFile2('3', '9')"><i class="fa fa-play"></i> Original</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-red-strong" onclick="playFile2('3', '10')"><i class="fa fa-play"></i> Modified</button>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadFile2('3', '10')"><i class="fa fa-play"></i> Modified</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="playFile2('3', '11')"><i class="fa fa-play"></i> Noise</button>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadFile2('3', '11')"><i class="fa fa-play"></i> Noise</button>
                         </td>
                       </tr>
                     </tbody>
@@ -336,9 +336,7 @@
                 <div class="card" id="player2">
                     <div class="card-body">
                         <div class="col-12" style="min-height: 60px;">
-                            <h4 class="card-title">&nbsp;
-                              <span id="typed2" class="m-0" style="font-variant:small-caps;"></span>
-                            </h4>
+                            <h4 class="card-title"><span id="typed2" class="m-0" style="font-variant:small-caps;"></span></h4>
                         </div>
                         <hr>
 
@@ -346,8 +344,11 @@
                     </div>
                     <div class="card-footer text-center">
                         <div class="row justify-content-between;" style="align-items: center">
+                            <div style="margin-right:auto; padding-left:15px;">
+                                <button id="playBtn2" type="button" class="btn btn-md rgba-blue-strong" disabled onclick="playFile2();"><i class="fa fa-play"></i> Play</button>
+                            </div>
                             <div style="margin-left:auto; padding-right:15px;">
-                                <button type="button" class="btn btn-md rgba-red-strong" onclick="stopFile2();"><i class="fa fa-stop"></i> Stop</button>
+                                <button id="stopBtn2" type="button" class="btn btn-md rgba-red-strong" disabled onclick="stopFile2();"><i class="fa fa-stop"></i> Stop</button>
                             </div>
                         </div>
                     </div>
@@ -485,7 +486,7 @@
   </div><!-- end container -->
   </footer>
 <!-- Footer -->
-
+ <button id="myhiddenbutton" style="display: none;"></button>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -493,6 +494,7 @@
   <script src="js/wavesurfer/wavesurfer.min.js"></script>
   <script src="js/typed.js"></script>
   <script src="js/settings.js"></script>
+  <script src="js/audio.js"></script>
   <script>
     $('.navbar-collapse a').click(function () {
       $(".navbar-collapse").collapse('hide');
@@ -513,86 +515,5 @@
       }, 700);
     });
   </script>
-<script>
-    var wavesurfer = WaveSurfer.create({
-        container: '#waveform',
-        waveColor: '#82b1ff',
-        interact: false,
-        barWidth: 3,
-        progressColor: '#f7f7f7',
-    });
-    var wavesurfer2 = WaveSurfer.create({
-        container: '#waveform2',
-        waveColor: '#82b1ff',
-        interact: false,
-        barWidth: 3,
-        progressColor: '#f7f7f7',
-    });
 
-    var options = {
-            strings: [""],
-            showCursor: false,
-    }
-    var typedObj = new Typed("#typed", options);
-    var typedObj2 = new Typed("#typed2", options);
-    var currentCardNumber = -1;
-    var currentId = -1;
-
-    </script>
-
-    <script>
-
-    $(function() {
-        $('#player').hide();
-        $('#player2').hide();
-    });
-    function playFile(cardNumber, id) {
-        currentCardNumber = cardNumber;
-        currentId = id;
-
-        wavesurfer.stop();
-        $('#player').show(500,function() {
-            wavesurfer.load('audio/'+settings[currentId]["file"]);
-        });
-
-        wavesurfer.on('ready', function () {
-            typedObj.strings = [settings[currentId]["song_text"]];
-            typedObj.typeSpeed = settings[currentId]["type_speed"];
-            typedObj.reset();
-            wavesurfer.play();
-        });
-    }
-    function playFile2(cardNumber, id) {
-        currentCardNumber = cardNumber;
-        currentId = id;
-
-        wavesurfer.stop();
-        $('#player2').show(500,function() {
-            wavesurfer2.load('audio/'+settings[currentId]["file"]);
-        });
-
-        wavesurfer2.on('ready', function () {
-            typedObj2.strings = [settings[currentId]["song_text"]];
-            typedObj2.typeSpeed = settings[currentId]["type_speed"];
-            typedObj2.reset();
-            wavesurfer2.play();
-        });
-    }
-
-    function stopFile(){
-        wavesurfer.stop();
-        wavesurfer.empty();
-        typedObj.reset(false);
-        //$('#spectrums').hide(500);
-        $('#player').hide(500);
-    }
-    function stopFile2(){
-        wavesurfer2.stop();
-        wavesurfer2.empty();
-        typedObj2.reset(false);
-        //$('#spectrums').hide(500);
-        $('#player2').hide(500);
-    }
-    </script>
 </body>
-
