@@ -76,13 +76,14 @@ def read_orignal_from_post(dir):
 
 def main():
 
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         print("Wrong or not enough arguments")
         sys.exit()
 
     data_name = sys.argv[1]
     num_jobs = int(sys.argv[2])
     dir_name = sys.argv[3]
+    len_post = int(sys.argv[4])
 
     print("defined for experiments: " + data_name)
     print("defined for jobs: " + str(num_jobs))
@@ -91,16 +92,12 @@ def main():
     root_dir = "./"
     # init align dir
     # TODO: define as parameter
-    #align_dir = root_dir + "exp/nnet5d_gpu_time/spoof_test_eval92/"
-    align_dir = root_dir + "exp/"+ dir_name + "/spoof_" + data_name + "/"
+    align_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name + "/"
     # target dir
-    tar_dir = align_dir + "updated/"
-    # spoof utterances
+    tar_dir = align_dir + "utterances/"
+    # adversarial utterances
     utt_dir = root_dir + "targets/utterances/"
 
-
-    # TODO: read in
-    len_post = 3344
     align_list = read_forced_align(align_dir, num_jobs)
 
     for al_num,align in enumerate(align_list):

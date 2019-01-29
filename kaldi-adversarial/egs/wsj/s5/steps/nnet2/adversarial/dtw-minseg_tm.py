@@ -154,17 +154,19 @@ def read_orignal_from_post(dir):
     path_all = []
     filenames = []
     for u in os.listdir(dir):
-        print(u.split(".")[0])
-        filenames.append(u.split(".")[0])
-        with open(dir + u, 'r') as f:
-            original = f.readline().strip().split(",")
+        if u.endswith('.csv'):
+            print(u.split(".")[0])
+            filenames.append(u.split(".")[0])
+            
+            with open(dir + u, 'r') as f:
+                original = f.readline().strip().split(",")
 
-            path = []
-            for elem in original:
-                if elem.isdigit():
-                    path.append(int(elem))
+                path = []
+                for elem in original:
+                    if elem.isdigit():
+                        path.append(int(elem))
 
-            path_all.append(path)
+                path_all.append(path)
 
     return path_all, filenames
 
@@ -483,12 +485,13 @@ def read_max_seg(tar_dir, filenames):
 
 def main():
 
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 4:
         print("Wrong or not enough arguments")
         sys.exit()
 
     data_name = sys.argv[1]
     dir_name = sys.argv[2]
+    len_post = int(sys.argv[3]) # 3447
 
     # num utterance
     print("defined for experiments: " + data_name)
@@ -496,21 +499,18 @@ def main():
 
 
     root_dir = "./"
-    #root_dir = "/media/lea/Daten/Scibo/Projects/asr_hidden_voice_commands.git/kaldi/egs/wsj/s5/"
     # file with triphone sequence
     seq_dir = root_dir + "targets/target-post-sequence.txt"
-    # spoof utterance
-    utt_dir = root_dir + "targets/utterances/" + data_name + "/"
+    # adversarial utterance
+    utt_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name +  "/utterances/"
     # target dir
-    #tar_dir = root_dir + "exp/nnet5d_gpu_time/spoof_test_eval92/updated/"
-    tar_dir = root_dir + "exp/"+ dir_name + "/spoof_" + data_name + "/updated/"
-    #tar_dir =  "/home/lea/fusessh/big-data/Lea/kaldi/wsj/exp/nnet5d_gpu_time/spoof_music/updated/"
+    tar_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name + "/utterances/"
 
 
     # data dir
     data_dir = root_dir + "data/"
-    # spoofed text
-    spoofed_text_dir = data_dir + data_name + "/target"
+    # adversarial text
+    adversarial_text_dir = data_dir + data_name + "/target"
 
     # sil phones
     sil_dir = root_dir + "targets/sil-post.txt"
@@ -518,15 +518,12 @@ def main():
     # contains silence phones
     # TODO: remove, is in 'utterances'
     sil_cl = Silence(sil_dir)
-    # length of posteriograms
-    # TODO: define implicit
-    len_post = 3447
 
     print("Parse target utterances...")
     utterances = read_utterance(seq_dir, sil_dir)
     print("Finished parsing\n\n")
 
-    print("Read in spoof utterances orignal posteriograms...")
+    print("Read in adversarial utterances orignal posteriograms...")
     original, filenames = read_orignal_from_post(utt_dir)
     print("Finished read")
 
@@ -537,7 +534,7 @@ def main():
 
     n_target = {}
     #n_target = []
-    with open(spoofed_text_dir) as read_file:
+    with open(adversarial_text_dir) as read_file:
         for line in read_file:
             line = line.split()
             print("{} {}".format(line[0], int(line[1])))

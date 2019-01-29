@@ -17,13 +17,15 @@ def main():
     data_dir = root_dir + "data/"
     # spoofed text
     #spoofed_text_dir = data_dir + "spoof_eval92/"
-    spoofed_text_dir = data_dir + "spoof_" + data_name + "/"
+    spoofed_text_dir = data_dir + "adversarial_" + data_name + "/"
     target_text_dir = data_dir + data_name + "/target"
     # original text
     #original_text_dir = data_dir + "test_eval92/"
     original_text_dir = data_dir + data_name + "/"
     # target dir
     target_utt = root_dir + "targets/target-utterances.txt"
+    # adversarial wav
+    adversarial_wav_dir = "adversarial-wav/" + data_name
 
     n_target = {}
     with open(target_text_dir) as read_file:
@@ -88,7 +90,7 @@ def main():
                     with open(text_dir) as read_file:
                         for line in read_file:
                             line = line.split()
-                            write_file.write("{} spoofed/{}.wav\n".format(line[0], line[0]))
+                            write_file.write("{} {}/{}.wav\n".format(line[0], adversarial_wav_dir, line[0]))
 
 
 
