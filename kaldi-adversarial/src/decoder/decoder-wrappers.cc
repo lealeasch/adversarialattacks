@@ -247,11 +247,9 @@ bool DecodeUtteranceLatticeFaster(
     if (alignment_writer->IsOpen())
       alignment_writer->Write(utt, alignment);
 
-    KALDI_LOG << "DIR: " << dir;
     if(save_in_csv) {
       std::string wxfilename = dir + "/utterances/" + utt + ".csv";
       
-      KALDI_LOG << wxfilename;
 
       std::ofstream out(wxfilename);
       for(int32 i = 0; i < alignment.size(); i++)

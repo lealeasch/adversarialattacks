@@ -33,6 +33,8 @@ thresh=20.0
 numiter=500
 experiment=
 targetnum=
+net_dir=
+num_states=
 # End configuration section.
 
 echo "$0 $@"  # Print the command line for logging
@@ -40,7 +42,7 @@ echo "$0 $@"  # Print the command line for logging
 [ -f ./path.sh ] && . ./path.sh; # source the path.
 . parse_options.sh || exit 1;
 
-if [ $# -ne 8 ]; then
+if [ $# -ne 9 ]; then
   echo "Usage: $0 [options] <graph-dir> <data-dir> <decode-dir>"
   echo " e.g.: $0 --transform-dir exp/tri3b/decode_dev93_tgpr \\"
   echo "      exp/tri3b/graph_tgpr data/test_dev93 exp/tri4a_nnet/decode_dev93_tgpr"
@@ -70,6 +72,10 @@ lang=$5
 tree=$6
 datasp=$7
 rdir=$8
+net_dir=$9
+
+num_states=$(cat $net_dir/num_states) || exit 1;
+echo $num_states
 
 srcdir=`dirname $dir`; # Assume model directory one level up from decoding directory.
 model=$srcdir/$iter.mdl
@@ -77,16 +83,17 @@ sdata=$data/split$nj;
 sdatasp=$datasp/split$nj;
 oov=`cat $lang/oov.int`
 
+mkdir -p ${datasp}
+
 cp ${data}/spk2utt ${datasp}/
 cp ${data}/utt2spk ${datasp}/
 cp ${data}/wav.scp ${datasp}/
 
 python "steps/nnet2/adversarial/parse_utterance.py"
 phone-to-post "$dir/../tree" "./targets"
-python "steps/nnet2/adversarial/dtw-minseg_tm.py" $experiment $rdir
+python "steps/nnet2/adversarial/dtw-minseg_tm.py" $experiment $rdir $num_states
 
 copy-tree --binary=false "exp/${rdir}/tree" tree
-
 
 [ ! -z "$online_ivector_dir" ] && \
   extra_files="$online_ivector_dir/ivector_online.scp $online_ivector_dir/ivector_period"
@@ -169,6 +176,7 @@ if [ ! -z "$online_ivector_dir" ]; then
   feats="$feats paste-feats --length-tolerance=$ivector_period ark:- 'ark,s,cs:utils/filter_scp.pl $sdata/JOB/utt2spk $online_ivector_dir/ivector_online.scp | subsample-feats --n=-$ivector_period scp:- ark:- | copy-matrix --scale=$ivector_scale ark:- ark:-|' ark:- |"
 fi
 
+
 python "steps/nnet2/adversarial/init_text_tm.py" $experiment
 echo "$0: compiling graphs of transcripts"
 $cmd JOB=1:$nj $dir/log/compile_graphs.JOB.log \
@@ -183,18 +191,20 @@ $cmd JOB=1:$nj $dir/log/align.JOB.log \
  
 echo "$0: get aligns"
 
-python "steps/nnet2/adversarial/init_target.py" $experiment $nj $rdir
+find $datasp -name "wa" -delete
+
+python "steps/nnet2/adversarial/init_target.py" $experiment $nj $rdir $num_states
 
 find $dir -name "adversarial.csv" -delete
 rm -f "$dir/scoring_kaldi/wer_details/utt_itr"
 
-for i in `seq 1 100`; 
+for i in `seq 1 10`; 
 do
 
   echo "$dir/scoring_kaldi/wer_details/utt_itr"
   echo "$0: Starting spoofing $i"
   if [ $stage -le 1 ]; then
-    mkdir -p "$dir/updated"
+    #mkdir -p "$dir/utterances"
     $cmd --num-threads $num_threads JOB=1:$nj $dir/log/adversarial.JOB.log \
       nnet-spoof-iter \
        --minimize=$minimize --max-active=$max_active --min-active=$min_active --beam=$beam \

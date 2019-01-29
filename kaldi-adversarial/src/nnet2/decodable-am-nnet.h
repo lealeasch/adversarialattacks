@@ -263,7 +263,7 @@ class DecodableAmNnetSpoof: public DecodableInterface {
 
     // Read in arg from csv file
     //std::string dir_utt = path + "/new_target.csv";
-    std::string dir_utt = path + "/" + utt + "/target.csv";
+    std::string dir_utt = path + "utterances/" + utt + "/target.csv";
     ReadCuMatrixBaseFloat(dir_utt, &target_log_probs, false);
 
     CuMatrix<BaseFloat> thresholds(num_rows_target, trans_model.NumPdfs());
@@ -629,7 +629,7 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
         KALDI_LOG << "FEATS: "  << updated_feats(rr,cc) << "    " << log_probs_updated(rr,cc) << "    " << grad_part(rr,cc);
     }
 
-    saveMatrix(log_probs_updated, utt, path, "utterances");
+   // saveMatrix(log_probs_updated, utt, path, "utterances");
 
     KALDI_LOG << "FEATS: " << updated_feats(rr,cc) << "    " << log_probs_updated(rr,cc);
 
@@ -642,7 +642,8 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     //updated_feats_normed = reNormalize(updated_feats, utt);
     //updated_feats.Scale(max_val);
 
-    saveMatrix(updated_feats, utt, path, "adversarial");
+     std::string path_adv = path +  + "/utterances/";
+    saveMatrix(updated_feats, utt, path_adv, "adversarial");
 
 
     log_probs_updated.ApplyFloor(1.0e-20); // Avoid log of zero which leads to NaN.

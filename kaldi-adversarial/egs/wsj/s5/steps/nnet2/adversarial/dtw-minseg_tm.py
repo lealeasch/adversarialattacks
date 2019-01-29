@@ -154,17 +154,19 @@ def read_orignal_from_post(dir):
     path_all = []
     filenames = []
     for u in os.listdir(dir):
-        print(u.split(".")[0])
-        filenames.append(u.split(".")[0])
-        with open(dir + u, 'r') as f:
-            original = f.readline().strip().split(",")
+        if u.endswith('.csv'):
+            print(u.split(".")[0])
+            filenames.append(u.split(".")[0])
+            
+            with open(dir + u, 'r') as f:
+                original = f.readline().strip().split(",")
 
-            path = []
-            for elem in original:
-                if elem.isdigit():
-                    path.append(int(elem))
+                path = []
+                for elem in original:
+                    if elem.isdigit():
+                        path.append(int(elem))
 
-            path_all.append(path)
+                path_all.append(path)
 
     return path_all, filenames
 
@@ -483,12 +485,13 @@ def read_max_seg(tar_dir, filenames):
 
 def main():
 
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 4:
         print("Wrong or not enough arguments")
         sys.exit()
 
     data_name = sys.argv[1]
     dir_name = sys.argv[2]
+    len_post = int(sys.argv[3]) # 3447
 
     # num utterance
     print("defined for experiments: " + data_name)
@@ -499,9 +502,9 @@ def main():
     # file with triphone sequence
     seq_dir = root_dir + "targets/target-post-sequence.txt"
     # adversarial utterance
-    utt_dir = root_dir + "targets/utterances/" + data_name + "/"
+    utt_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name +  "/utterances/"
     # target dir
-    tar_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name + "/updated/"
+    tar_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name + "/utterances/"
 
 
     # data dir
@@ -515,9 +518,6 @@ def main():
     # contains silence phones
     # TODO: remove, is in 'utterances'
     sil_cl = Silence(sil_dir)
-    # length of posteriograms
-    # TODO: define implicit
-    len_post = 3447
 
     print("Parse target utterances...")
     utterances = read_utterance(seq_dir, sil_dir)

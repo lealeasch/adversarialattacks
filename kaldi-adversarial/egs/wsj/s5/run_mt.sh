@@ -1,7 +1,7 @@
 #!/bin/bash
 stage=0
 
-dataname=test_dev93_mt_9
+dataname=test_dev93_mt_1_new
 
 thresh=-1
 itr=100
@@ -143,17 +143,8 @@ if [ $stage -le 2 ]; then
           $exp/tri1/decode_nosp_tgpr_${x} \
           $exp/tri1/decode_nosp_tgpr_${x}_tg$mode  || exit 1;
       done
-      # later on we'll demonstrate const-arpa LM rescoring, which is now
-      # the recommended method.
-    done
 
-    ## the following command demonstrates how to get lattices that are
-    ## "word-aligned" (arcs coincide with words, with boundaries in the right
-    ## place).
-    #sil_label=`grep '!SIL' data/lang_nosp_test_tgpr/words.txt | awk '{print $2}'`
-    #steps/word_align_lattices.sh --cmd "$train_cmd" --silence-label $sil_label \
-    #  data/lang_nosp_test_tgpr exp/tri1/decode_nosp_tgpr_dev93 \
-    #  exp/tri1/decode_nosp_tgpr_dev93_aligned || exit 1;
+    done
   fi
 fi
 
@@ -196,11 +187,6 @@ if [ $stage -le 3 ]; then
          $exp/tri2b/decode_nosp_tgpr_${x}_tg_mbr
     done
   fi
-
-  # At this point, you could run the example scripts that show how VTLN works.
-  # We haven't included this in the default recipes.
-  # local/run_vtln.sh --lang-suffix "_nosp"
-  # local/run_vtln2.sh --lang-suffix "_nosp"
 fi
 
 
@@ -401,7 +387,7 @@ if [ $stage -le 9 ]; then
 
 
 # Attention!! In get_egs.sh change parameter 'num_utts_subset' to define number of validation utterances
-if [ ! -f $dir/final.mdl ]; then
+#if [ ! -f $dir/final.mdl ]; then
 steps/nnet2/train_pnorm_fast_time.sh --stage $train_stage \
    --samples-per-iter 400000 \
    --parallel-opts "$parallel_opts" \
@@ -413,7 +399,7 @@ steps/nnet2/train_pnorm_fast_time.sh --stage $train_stage \
    --pnorm-input-dim 2000 --pnorm-output-dim 400 \
    --cmd "$decode_cmd" \
     data/train_si284 data/lang exp/tri4b $dir
-fi
+#fi
 
 
   steps/nnet2/decode.sh --cmd "$decode_cmd" --nj 10 \
@@ -431,8 +417,9 @@ fi
 
 if [ $stage -le 10 ]; then
 
-  rm -f adversarial_${dataname}/utterances/*.csv
   mkdir -p ${dir}/decode_${dataname}/utterances
+
+  utils/spk2utt_to_utt2spk.pl data/${dataname}/spk2utt > data/${dataname}/utt2spk
 
   for x in $dataname; do
     steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
@@ -444,7 +431,7 @@ if [ $stage -le 10 ]; then
 
   # move to adversarial folder
   mkdir -p ${dir}/adversarial_${dataname}/utterances
-  mv ${dir}/decode_${dataname}/utterances ${dir}/adversarial_${dataname}/utterances
+  mv ${dir}/decode_${dataname}/utterances ${dir}/adversarial_${dataname}
 
 fi
 
@@ -452,35 +439,33 @@ if [ $stage -le 11 ]; then
 
   mkdir -p $dir/adversarial_${dataname}/thresholds
 
-  cd hearingThresholds/ # ../data/${dataname}/wav.scp ../${dir}/thresholds/
-  matlab -nodesktop -nodisplay -nosplash -r  "calc_threshold('../data/test_dev93_mt_9/wav.scp', 256, 128, '../exp/nnet5d_gpu_time/adversarial_test_dev93_mt_9/thresholds/')"
+  cd hearingThresholds/
+  matlab -nodesktop -nodisplay -nosplash -r  "calc_threshold('../data/${dataname}/wav.scp', 256, 128, '../${dir}/adversarial_${dataname}/thresholds/')"
   cd ..
+fi
 
+if [ $stage -le 12 ]; then
   steps/nnet2/adversarial/adversarial_mt.sh --cmd "$decode_cmd" --nj $numjobs --thresh $thresh --numiter $itr --experiment $dataname \
-    exp/tri4b/graph_bd_tgpr data/$dataname $dir/adversarial_$dataname exp/tri4b data/lang $dir/tree data/adversarial_$dataname $model_name
+    exp/tri4b/graph_bd_tgpr data/$dataname $dir/adversarial_$dataname exp/tri4b data/lang $dir/tree data/adversarial_$dataname $model_name $dir
 
 fi
 
-exit 0
+if [ $stage -le 13 ]; then
 
-if [ $stage -le 12 ]; then
+  cd steps/nnet2/adversarial/
+  matlab -nodesktop -nodisplay -nosplash -r  "synthesize('${dataname}', '../../../${dir}/adversarial_${dataname}/utterances/', '../../../data/${dataname}/wav.scp', 16000, 256)"
+  cd ../../..
 
-  # replace with python
-  matlab -nodesktop -nodisplay -nosplash -r "../../../matlab/synthesize.m"
-  
-  exit 0
-  for x in spoof_$dataname; do
+
+  for x in adversarial_$dataname; do
     steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
     steps/compute_cmvn_stats.sh data/$x || exit 1;
   done
 
   steps/nnet2/decode.sh --cmd "$decode_cmd" --nj $numjobs \
-    exp/tri4b/graph_bd_tgpr data/spoof_$dataname "$dir/decode_${dataname}_${targetnum}_${thresh}_$itr"
+    exp/tri4b/graph_bd_tgpr data/adversarial_$dataname "$dir/decode_${dataname}_${targetnum}_${thresh}_$itr"
 
-    mkdir "experiments/${dataname}_${targetnum}_${thresh}_$itr"
-    mv spoofed/*.wav "experiments/${dataname}_${targetnum}_${thresh}_${itr}/"
-
-    for x in "$dir/decode_${dataname}_${targetnum}_${thresh}_$itr"; do [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh; done
+  for x in "$dir/decode_${dataname}_${targetnum}_${thresh}_$itr"; do [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh; done
 
 fi
 

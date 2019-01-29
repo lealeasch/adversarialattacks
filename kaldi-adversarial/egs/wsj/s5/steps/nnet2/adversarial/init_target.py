@@ -76,13 +76,14 @@ def read_orignal_from_post(dir):
 
 def main():
 
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         print("Wrong or not enough arguments")
         sys.exit()
 
     data_name = sys.argv[1]
     num_jobs = int(sys.argv[2])
     dir_name = sys.argv[3]
+    len_post = int(sys.argv[4])
 
     print("defined for experiments: " + data_name)
     print("defined for jobs: " + str(num_jobs))
@@ -97,9 +98,6 @@ def main():
     # adversarial utterances
     utt_dir = root_dir + "targets/utterances/"
 
-
-    # TODO: read in
-    len_post = 3488
     align_list = read_forced_align(align_dir, num_jobs)
 
     for al_num,align in enumerate(align_list):

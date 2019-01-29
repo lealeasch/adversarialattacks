@@ -161,6 +161,8 @@ num_leaves=`tree-info $alidir/tree 2>/dev/null | grep num-pdfs | awk '{print $2}
 [ -z $num_leaves ] && echo "\$num_leaves is unset" && exit 1
 [ "$num_leaves" -eq "0" ] && echo "\$num_leaves is 0" && exit 1
 
+echo $num_leaves > $dir/num_states
+
 nj=`cat $alidir/num_jobs` || exit 1;  # number of jobs in alignment dir...
 # in this dir we'll have just one job.
 sdata=$data/split$nj
@@ -246,6 +248,8 @@ NormalizeComponent dim=$pnorm_output_dim
 AffineComponentPreconditionedOnline input-dim=$pnorm_output_dim output-dim=$num_leaves $online_preconditioning_opts learning-rate=$initial_learning_rate param-stddev=0 bias-stddev=0
 SoftmaxComponent dim=$num_leaves
 EOF
+
+
 
 # 1 = hamming
 # 2 = rect --> use this
