@@ -17,7 +17,7 @@ def main():
     data_dir = root_dir + "data/"
     # spoofed text
     #spoofed_text_dir = data_dir + "spoof_eval92/"
-    spoofed_text_dir = data_dir + "spoof_" + data_name + "/"
+    spoofed_text_dir = data_dir + "adversarial_" + data_name + "/"
     target_text_dir = data_dir + data_name + "/target"
     # original text
     #original_text_dir = data_dir + "test_eval92/"

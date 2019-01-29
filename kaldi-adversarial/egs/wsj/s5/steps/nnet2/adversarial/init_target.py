@@ -91,16 +91,15 @@ def main():
     root_dir = "./"
     # init align dir
     # TODO: define as parameter
-    #align_dir = root_dir + "exp/nnet5d_gpu_time/spoof_test_eval92/"
-    align_dir = root_dir + "exp/"+ dir_name + "/spoof_" + data_name + "/"
+    align_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name + "/"
     # target dir
-    tar_dir = align_dir + "updated/"
-    # spoof utterances
+    tar_dir = align_dir + "utterances/"
+    # adversarial utterances
     utt_dir = root_dir + "targets/utterances/"
 
 
     # TODO: read in
-    len_post = 3344
+    len_post = 3488
     align_list = read_forced_align(align_dir, num_jobs)
 
     for al_num,align in enumerate(align_list):

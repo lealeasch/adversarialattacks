@@ -407,7 +407,7 @@ steps/nnet2/train_pnorm_fast_time.sh --stage $train_stage \
    --parallel-opts "$parallel_opts" \
    --num-threads "$num_threads" \
    --minibatch-size "$minibatch_size" \
-   --num-jobs-nnet 8  --mix-up 8000 \
+   --num-jobs-nnet 6  --mix-up 8000 \
    --initial-learning-rate 0.02 --final-learning-rate 0.004 \
    --num-hidden-layers 4 \
    --pnorm-input-dim 2000 --pnorm-output-dim 400 \
@@ -429,30 +429,10 @@ fi
     exp/tri4b/graph_bd_tgpr data/test_eval92 $dir/decode_bd_tgpr_eval92
 fi
 
-#if [ $stage -le 10 ]; then
-#
-#  #steps/nnet2/spoof.sh --cmd "$decode_cmd" --nj 1 \
-#  #  exp/tri4b/graph_bd_tgpr data/test_dev93 $dir/spoof_test_dev93
-#
-#  steps/nnet2/spoof.sh --cmd "$decode_cmd" --nj 8 \
-#    exp/tri4b/graph_bd_tgpr data/test_eval92 $dir/spoof_test_eval92 exp/tri4b data/lang $dir/tree data/spoof_eval92 $model_name
-#
-#fi
-#
-#if [ $stage -le 11 ]; then
-#
-#  for x in spoof_eval92; do
-#    steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
-#    steps/compute_cmvn_stats.sh data/$x || exit 1;
-#  done
-#
-#  steps/nnet2/decode.sh --cmd "$decode_cmd" --nj 8 \
-#    exp/tri4b/graph_bd_tgpr data/spoof_eval92 $dir/decode_spoof_eval92
-#fi
-
-
 if [ $stage -le 10 ]; then
-  rm -f targets/utterances/*.csv
+
+  rm -f adversarial_${dataname}/utterances/*.csv
+  mkdir -p ${dir}/decode_${dataname}/utterances
 
   for x in $dataname; do
     steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
@@ -462,26 +442,33 @@ if [ $stage -le 10 ]; then
   steps/nnet2/decode.sh --cmd "$decode_cmd" --nj $numjobs \
      exp/tri4b/graph_bd_tgpr data/$dataname $dir/decode_$dataname
 
-  mkdir targets/utterances/$dataname
-  # move to pythons
-  mv targets/utterances/*.csv targets/utterances/$dataname
+  # move to adversarial folder
+  mkdir -p ${dir}/adversarial_${dataname}/utterances
+  mv ${dir}/decode_${dataname}/utterances ${dir}/adversarial_${dataname}/utterances
 
 fi
 
 if [ $stage -le 11 ]; then
 
-  steps/nnet2/adversarial/adversarial_mt.sh --cmd "$decode_cmd" --nj $numjobs --thresh $thresh --numiter $itr --experiment $dataname \
-    exp/tri4b/graph_bd_tgpr data/$dataname $dir/spoof_$dataname exp/tri4b data/lang $dir/tree data/spoof_$dataname $model_name
+  mkdir -p $dir/adversarial_${dataname}/thresholds
 
-    #exit 0
+  cd hearingThresholds/ # ../data/${dataname}/wav.scp ../${dir}/thresholds/
+  matlab -nodesktop -nodisplay -nosplash -r  "calc_threshold('../data/test_dev93_mt_9/wav.scp', 256, 128, '../exp/nnet5d_gpu_time/adversarial_test_dev93_mt_9/thresholds/')"
+  cd ..
+
+  steps/nnet2/adversarial/adversarial_mt.sh --cmd "$decode_cmd" --nj $numjobs --thresh $thresh --numiter $itr --experiment $dataname \
+    exp/tri4b/graph_bd_tgpr data/$dataname $dir/adversarial_$dataname exp/tri4b data/lang $dir/tree data/adversarial_$dataname $model_name
 
 fi
+
+exit 0
 
 if [ $stage -le 12 ]; then
 
   # replace with python
-  #matlab -nodesktop -nosplash -r "../../../matlab/synthesize.m"
+  matlab -nodesktop -nodisplay -nosplash -r "../../../matlab/synthesize.m"
   
+  exit 0
   for x in spoof_$dataname; do
     steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
     steps/compute_cmvn_stats.sh data/$x || exit 1;

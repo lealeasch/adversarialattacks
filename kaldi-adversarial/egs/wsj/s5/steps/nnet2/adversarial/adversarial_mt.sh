@@ -154,7 +154,7 @@ if [ ! -z "$transform_dir" ]; then
     # number of jobs matches with alignment dir.
     feats="$feats transform-feats --utt2spk=ark:$sdata/JOB/utt2spk ark:$transform_dir/$trans.JOB ark:- ark:- |"
   fi
-elif grep 'transform-feats --utt2spk' $srcdir/log/train.1.log >&/dev/null; then
+elif grep 'transform-feats --utt2spk' $srcdir/log/adversarial.1.log >&/dev/null; then
   echo "$0: **WARNING**: you seem to be using a neural net system trained with transforms,"
   echo "  but you are not providing the --transform-dir option in test time."
 fi
@@ -185,7 +185,7 @@ echo "$0: get aligns"
 
 python "steps/nnet2/adversarial/init_target.py" $experiment $nj $rdir
 
-find $dir -name "99.csv" -delete
+find $dir -name "adversarial.csv" -delete
 rm -f "$dir/scoring_kaldi/wer_details/utt_itr"
 
 for i in `seq 1 100`; 
@@ -195,12 +195,12 @@ do
   echo "$0: Starting spoofing $i"
   if [ $stage -le 1 ]; then
     mkdir -p "$dir/updated"
-    $cmd --num-threads $num_threads JOB=1:$nj $dir/log/spoof.JOB.log \
+    $cmd --num-threads $num_threads JOB=1:$nj $dir/log/adversarial.JOB.log \
       nnet-spoof-iter \
        --minimize=$minimize --max-active=$max_active --min-active=$min_active --beam=$beam \
        --lattice-beam=$lattice_beam --acoustic-scale=$acwt --allow-partial=true \
        --word-symbol-table=$graphdir/words.txt "$model" \
-       $graphdir/HCLG.fst "$feats" "ark:|gzip -c > $dir/lat.JOB.gz" "$dir/updated" $numiter $thresh "$dir/scoring_kaldi/wer_details/utt_itr" "ark,t,f:$dir/words.txt" "ark,t,f:$dir/align.txt"; # || exit 1;
+       $graphdir/HCLG.fst "$feats" "ark:|gzip -c > $dir/lat.JOB.gz" "$dir" $numiter $thresh "$dir/scoring_kaldi/wer_details/utt_itr" "ark,t,f:$dir/words.txt" "ark,t,f:$dir/align.txt"; # || exit 1;
   fi
 
   if [ $stage -le 2 ]; then

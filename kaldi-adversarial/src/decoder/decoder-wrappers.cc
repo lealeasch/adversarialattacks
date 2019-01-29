@@ -209,7 +209,8 @@ bool DecodeUtteranceLatticeFaster(
     CompactLatticeWriter *compact_lattice_writer,
     LatticeWriter *lattice_writer,
     double *like_ptr,  // puts utterance's like in like_ptr on success.
-    bool save_in_csv) {
+    bool save_in_csv,
+    std::string dir) {
   using fst::VectorFst;
 
   if (!decoder.Decode(&decodable)) {
@@ -245,9 +246,13 @@ bool DecodeUtteranceLatticeFaster(
       words_writer->Write(utt, words);
     if (alignment_writer->IsOpen())
       alignment_writer->Write(utt, alignment);
+
+    KALDI_LOG << "DIR: " << dir;
     if(save_in_csv) {
-      // TODO: define dir
-      std::string wxfilename = "targets/utterances/" + utt + ".csv";
+      std::string wxfilename = dir + "/utterances/" + utt + ".csv";
+      
+      KALDI_LOG << wxfilename;
+
       std::ofstream out(wxfilename);
       for(int32 i = 0; i < alignment.size(); i++)
             out << std::to_string(trans_model.TransitionIdToPdf(alignment[i])) + ",";

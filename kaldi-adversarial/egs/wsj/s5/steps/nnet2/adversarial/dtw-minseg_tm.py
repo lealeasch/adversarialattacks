@@ -496,21 +496,18 @@ def main():
 
 
     root_dir = "./"
-    #root_dir = "/media/lea/Daten/Scibo/Projects/asr_hidden_voice_commands.git/kaldi/egs/wsj/s5/"
     # file with triphone sequence
     seq_dir = root_dir + "targets/target-post-sequence.txt"
-    # spoof utterance
+    # adversarial utterance
     utt_dir = root_dir + "targets/utterances/" + data_name + "/"
     # target dir
-    #tar_dir = root_dir + "exp/nnet5d_gpu_time/spoof_test_eval92/updated/"
-    tar_dir = root_dir + "exp/"+ dir_name + "/spoof_" + data_name + "/updated/"
-    #tar_dir =  "/home/lea/fusessh/big-data/Lea/kaldi/wsj/exp/nnet5d_gpu_time/spoof_music/updated/"
+    tar_dir = root_dir + "exp/"+ dir_name + "/adversarial_" + data_name + "/updated/"
 
 
     # data dir
     data_dir = root_dir + "data/"
-    # spoofed text
-    spoofed_text_dir = data_dir + data_name + "/target"
+    # adversarial text
+    adversarial_text_dir = data_dir + data_name + "/target"
 
     # sil phones
     sil_dir = root_dir + "targets/sil-post.txt"
@@ -526,7 +523,7 @@ def main():
     utterances = read_utterance(seq_dir, sil_dir)
     print("Finished parsing\n\n")
 
-    print("Read in spoof utterances orignal posteriograms...")
+    print("Read in adversarial utterances orignal posteriograms...")
     original, filenames = read_orignal_from_post(utt_dir)
     print("Finished read")
 
@@ -537,7 +534,7 @@ def main():
 
     n_target = {}
     #n_target = []
-    with open(spoofed_text_dir) as read_file:
+    with open(adversarial_text_dir) as read_file:
         for line in read_file:
             line = line.split()
             print("{} {}".format(line[0], int(line[1])))

@@ -552,17 +552,13 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     CuMatrix<BaseFloat> updated_feats(feats);
     CuMatrix<BaseFloat> log_probs_updated(log_probs);
 
-    std::string dir_utt_updated = path + "/" + utt + "/99.csv";
+    std::string dir_utt_updated = path + "/utterances/" + utt + "/adversarial.csv";
     ReadCuMatrixBaseFloat(dir_utt_updated, &updated_feats, false);
-
-    saveMatrix(updated_feats, utt, path, std::to_string(-1));
-
 
     Matrix<BaseFloat> results;
 
     // Read in arg from csv file
-    //std::string dir_utt = path + "/new_target.csv";
-    std::string dir_utt = path + "/" + utt + "/target.csv";
+    std::string dir_utt = path + "/utterances/" + utt + "/target.csv";
     ReadCuMatrixBaseFloat(dir_utt, &target_log_probs, false);
 
     CuMatrix<BaseFloat> thresholds(num_rows_target, trans_model.NumPdfs());
@@ -572,9 +568,6 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     CuMatrix<BaseFloat> thresholds_norm(num_rows_target, trans_model.NumPdfs());
     dir_utt = path + "/thresholds/" + utt + ".csv";
     ReadCuMatrixBaseFloat(dir_utt, &thresholds_norm, false);
-
-    saveMatrix(log_probs, utt, path, "original");
-    saveMatrix(target_log_probs, utt, path, "real-target");
 
     int rr = 105;
     int cc = 2589;
@@ -617,7 +610,7 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     KALDI_LOG << "Num Iterations: " << num_iter;
     KALDI_LOG << "Threshold : " << thresh;
 
-    for (int i = 0; i < num_iter; i++) { //70 --> 1500 0 + 1000 * num_utterance/2
+    for (int i = 0; i < num_iter; i++) { 
 
       // Do Spoofing
       DoSpoof(am_nnet.GetNnet(), updated_feats, keep_original_mag, thresholds, thresholds_norm, output_grad, target_log_probs, max_val_dB, thresh, &tot_diff, pad_input);
@@ -636,7 +629,7 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
         KALDI_LOG << "FEATS: "  << updated_feats(rr,cc) << "    " << log_probs_updated(rr,cc) << "    " << grad_part(rr,cc);
     }
 
-    saveMatrix(log_probs_updated, utt, path, "updated");
+    saveMatrix(log_probs_updated, utt, path, "utterances");
 
     KALDI_LOG << "FEATS: " << updated_feats(rr,cc) << "    " << log_probs_updated(rr,cc);
 
@@ -649,7 +642,7 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     //updated_feats_normed = reNormalize(updated_feats, utt);
     //updated_feats.Scale(max_val);
 
-    saveMatrix(updated_feats, utt, path, std::to_string(99));
+    saveMatrix(updated_feats, utt, path, "adversarial");
 
 
     log_probs_updated.ApplyFloor(1.0e-20); // Avoid log of zero which leads to NaN.

@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
     po.Read(argc, argv);
 
-    if (po.NumArgs() < 4 || po.NumArgs() > 6) {
+    if (po.NumArgs() < 4 || po.NumArgs() > 7) {
       po.PrintUsage();
       exit(1);
     }
@@ -66,8 +66,9 @@ int main(int argc, char *argv[]) {
         fst_in_str = po.GetArg(2),
         feature_rspecifier = po.GetArg(3),
         lattice_wspecifier = po.GetArg(4),
-        words_wspecifier = po.GetOptArg(5),
-        alignment_wspecifier = po.GetOptArg(6);
+        exp_dir = po.GetArg(5),
+        words_wspecifier = po.GetOptArg(6),
+        alignment_wspecifier = po.GetOptArg(7);
 
     TransitionModel trans_model;
     AmNnet am_nnet;
@@ -130,7 +131,7 @@ int main(int argc, char *argv[]) {
                   decoder, nnet_decodable, trans_model, word_syms, utt,
                   acoustic_scale, determinize, allow_partial, &alignment_writer,
                   &words_writer, &compact_lattice_writer, &lattice_writer,
-                  &like, true)) {
+                  &like, true, exp_dir)) {
             tot_like += like;
             frame_count += features.NumRows();
             num_success++;
@@ -169,7 +170,7 @@ int main(int argc, char *argv[]) {
                 decoder, nnet_decodable, trans_model, word_syms, utt,
                 acoustic_scale, determinize, allow_partial, &alignment_writer,
                 &words_writer, &compact_lattice_writer, &lattice_writer,
-                &like, true)) {
+                &like, true, exp_dir)) {
           tot_like += like;
           frame_count += features.NumRows();
           num_success++;

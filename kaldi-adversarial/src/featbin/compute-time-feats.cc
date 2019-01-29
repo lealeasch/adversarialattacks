@@ -140,8 +140,7 @@ int main(int argc, char *argv[]) {
       Matrix<BaseFloat> features;
       try {
         for(int32 i=0; i<10; i++)
-          KALDI_LOG << waveform(i);
-        time.ComputeFeatures(waveform, wave_data.SampFreq(), vtln_warp_local, &features);
+          time.ComputeFeatures(waveform, wave_data.SampFreq(), vtln_warp_local, &features);
       } catch (...) {
         KALDI_WARN << "Failed to compute features for utterance "
                    << utt;

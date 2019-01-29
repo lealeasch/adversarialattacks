@@ -133,13 +133,16 @@ if [ ! -z "$online_ivector_dir" ]; then
   feats="$feats paste-feats --length-tolerance=$ivector_period ark:- 'ark,s,cs:utils/filter_scp.pl $sdata/JOB/utt2spk $online_ivector_dir/ivector_online.scp | subsample-feats --n=-$ivector_period scp:- ark:- | copy-matrix --scale=$ivector_scale ark:- ark:-|' ark:- |"
 fi
 
+echo $dir 
+echo $thread_string
+
 if [ $stage -le 1 ]; then
   $cmd --num-threads $num_threads JOB=1:$nj $dir/log/decode.JOB.log \
     nnet-latgen-faster$thread_string \
      --minimize=$minimize --max-active=$max_active --min-active=$min_active --beam=$beam \
      --lattice-beam=$lattice_beam --acoustic-scale=$acwt --allow-partial=true \
      --word-symbol-table=$graphdir/words.txt "$model" \
-     $graphdir/HCLG.fst "$feats" "ark:|gzip -c > $dir/lat.JOB.gz" || exit 1;
+     $graphdir/HCLG.fst "$feats" "ark:|gzip -c > $dir/lat.JOB.gz" $dir || exit 1;
 fi
 
 if [ $stage -le 2 ]; then

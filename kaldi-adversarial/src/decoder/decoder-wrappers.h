@@ -133,7 +133,8 @@ bool DecodeUtteranceLatticeFaster(
     CompactLatticeWriter *compact_lattice_writer,
     LatticeWriter *lattice_writer,
     double *like_ptr, // puts utterance's likelihood in like_ptr on success.
-    bool save_in_csv = false);
+    bool save_in_csv = false,
+    std::string dir = "");
 
 /// This class basically does the same job as the function
 /// DecodeUtteranceLatticeFaster, but in a way that allows us

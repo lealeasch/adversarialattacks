@@ -37,22 +37,6 @@ void TimeComputer::Compute(BaseFloat signal_log_energy,
 
 
   feature->CopyFromVec(power_spectrum);
-
-
-/*if (srfft_ != NULL)  // Compute FFT using split-radix algorithm.
-    srfft_->Compute(signal_frame->Data(), true);
-  else  // An alternative algorithm that works for non-powers-of-two
-    RealFft(signal_frame, true);
-
-  // Convert the FFT into a power spectrum.
-  ComputePowerSpectrum(signal_frame);
-  SubVector<BaseFloat> power_spectrum(*signal_frame,
-                                      0, signal_frame->Dim() / 2 + 1);
-
-  power_spectrum.ApplyFloor(std::numeric_limits<BaseFloat>::epsilon());
-  power_spectrum.ApplyLog();
-
-  feature->CopyFromVec(power_spectrum);*/
 }
 
 TimeComputer::TimeComputer(const TimeOptions &opts):

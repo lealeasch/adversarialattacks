@@ -224,61 +224,24 @@ double SpoofUpdater::BackpropInput(CuMatrix<BaseFloat> *deriv, CuMatrix<BaseFloa
 
 
       if(original_magn.NumRows() != 0) {
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  original_magn: "<< original_magn(rr,cc) << "  original_magn: "<< original_magn(rr,cc+offset);
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  modified: "<< modified(rr,cc) << "  modified: "<< modified(rr,cc+offset);
 
         modified.AddMat(-1, original_magn);
         CalculateMagnitute(modified, &modified_dB);
         modified_dB.Add(-max_val_dB);
 
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  threshhold: "<< threshhold(rr,cc);
 
         CuMatrix<BaseFloat> temp(threshhold);
         temp.Add(-95.0+thresh);
 
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  threshhold-95: "<< temp(rr,cc);
-
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  modified_dB: "<< modified_dB(rr,cc);
-
         modified_dB.AddMat(-1, temp);
-
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  diff: "<< modified_dB(rr,cc);
-
-        /*for(int i = 0; i < modified_dB.NumRows(); i++) {
-            for(int j = 0; j < modified_dB.NumCols()/2; j++) {
-              if(modified_dB(i,j) > 0)
-                KALDI_LOG << "r: " << i << "  r: " << j << "  value: "<< modified_dB(i,j);
-            }
-        }*/
 
         scale_factors = modified_dB;
         scale_factors.Scale(-1.0/(66.2266+95.0));
 
-        /*for(int i = rr; i < rr+2; i++) { // modified_dB.NumRows()
-          for(int j = 0; j < modified_dB.NumCols()/2; j++) { //modified_dB.NumCols()/2
-            scale_factors(i,j) = 1;
-            scale_factors(i,j+offset) = 0;
-          }
-        }
-
-        for(int i = rr; i < rr+2; i++) { // modified_dB.NumRows()
-          for(int j = cc; j < cc+1; j++) { //modified_dB.NumCols()/2
-            scale_factors(i,j) = 1;
-            scale_factors(i,j+offset) = 1;
-          }
-        }*/
-
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  scale_factors before: "<< scale_factors(rr,cc);
-
         scale_factors.ApplyFloor(1.0e-20);
 
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  scale_factors after: "<< scale_factors(rr,cc);
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  scale_factors 2: "<< scale_factors2(rr,cc);
-
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  deriv: "<< (*deriv)(rr,cc);
         deriv->MulElements(scale_factors);
 
-        //KALDI_LOG << "r: " << rr << "  c: " << cc << "  deriv after: "<< (*deriv)(rr,cc);
 
       } else {
         CalculateMagnitute(output, &modified_dB);

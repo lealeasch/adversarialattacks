@@ -17,8 +17,8 @@ def main():
 
     root_dir = "./"
     # result dir
-    result_dir = root_dir + "exp/" + dir_name +"/spoof_" + data_name + "/scoring_kaldi/wer_details/per_utt"
-    itr_dir = root_dir + "exp/" + dir_name + "/spoof_" + data_name + "/scoring_kaldi/wer_details/utt_itr"
+    result_dir = root_dir + "exp/" + dir_name +"/adversarial_" + data_name + "/scoring_kaldi/wer_details/per_utt"
+    itr_dir = root_dir + "exp/" + dir_name + "/adversarial_" + data_name + "/scoring_kaldi/wer_details/utt_itr"
 
     utt = []
     if os.path.isfile(itr_dir):
