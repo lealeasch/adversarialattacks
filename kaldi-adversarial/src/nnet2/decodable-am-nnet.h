@@ -561,6 +561,8 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     std::string dir_utt = path + "/utterances/" + utt + "/target.csv";
     ReadCuMatrixBaseFloat(dir_utt, &target_log_probs, false);
 
+    KALDI_LOG << "COLS: " << num_rows_target << "    ROWS: " << trans_model.NumPdfs();
+
     CuMatrix<BaseFloat> thresholds(num_rows_target, trans_model.NumPdfs());
     dir_utt = path + "/thresholds/" + utt + "_dB.csv";
     ReadCuMatrixBaseFloat(dir_utt, &thresholds, false);

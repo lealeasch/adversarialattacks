@@ -4,11 +4,12 @@ from fnmatch import fnmatch
 
 def main():
 
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print("Wrong or not enough arguments")
         sys.exit()
 
     data_name = sys.argv[1]
+    thresh=int(sys.argv[2])
     # num utterance
     print("defined for experiments: " + data_name)
 
@@ -25,7 +26,7 @@ def main():
     # target dir
     target_utt = root_dir + "targets/target-utterances.txt"
     # adversarial wav
-    adversarial_wav_dir = "adversarial-wav/" + data_name
+    adversarial_wav_dir = "adversarial-wav/" + data_name + "_" + str(thresh) + "dB"
 
     n_target = {}
     with open(target_text_dir) as read_file:

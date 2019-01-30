@@ -1,10 +1,11 @@
 #!/bin/bash
 stage=0
 
-dataname=test_dev93_mt_1_new
+dataname=test_dev93_mt_9
 
-thresh=-1
+thresh=0
 itr=100
+max_itr=50
 
 numjobs=20
 split=20
@@ -387,7 +388,7 @@ if [ $stage -le 9 ]; then
 
 
 # Attention!! In get_egs.sh change parameter 'num_utts_subset' to define number of validation utterances
-#if [ ! -f $dir/final.mdl ]; then
+if [ ! -f $dir/final.mdl ]; then
 steps/nnet2/train_pnorm_fast_time.sh --stage $train_stage \
    --samples-per-iter 400000 \
    --parallel-opts "$parallel_opts" \
@@ -399,7 +400,7 @@ steps/nnet2/train_pnorm_fast_time.sh --stage $train_stage \
    --pnorm-input-dim 2000 --pnorm-output-dim 400 \
    --cmd "$decode_cmd" \
     data/train_si284 data/lang exp/tri4b $dir
-#fi
+fi
 
 
   steps/nnet2/decode.sh --cmd "$decode_cmd" --nj 10 \
@@ -440,22 +441,26 @@ if [ $stage -le 11 ]; then
   mkdir -p $dir/adversarial_${dataname}/thresholds
 
   cd hearingThresholds/
-  matlab -nodesktop -nodisplay -nosplash -r  "calc_threshold('../data/${dataname}/wav.scp', 256, 128, '../${dir}/adversarial_${dataname}/thresholds/')"
+  matlab -nodesktop -nodisplay -nosplash -r  "calc_threshold('../data/${dataname}/wav.scp', 512, 256, '../${dir}/adversarial_${dataname}/thresholds/')"
   cd ..
 fi
 
 if [ $stage -le 12 ]; then
-  steps/nnet2/adversarial/adversarial_mt.sh --cmd "$decode_cmd" --nj $numjobs --thresh $thresh --numiter $itr --experiment $dataname \
+  steps/nnet2/adversarial/adversarial_mt.sh --cmd "$decode_cmd" --nj $numjobs --thresh $thresh --numiter $itr --maxitr $max_itr --experiment $dataname \
     exp/tri4b/graph_bd_tgpr data/$dataname $dir/adversarial_$dataname exp/tri4b data/lang $dir/tree data/adversarial_$dataname $model_name $dir
-
 fi
 
 if [ $stage -le 13 ]; then
 
   cd steps/nnet2/adversarial/
-  matlab -nodesktop -nodisplay -nosplash -r  "synthesize('${dataname}', '../../../${dir}/adversarial_${dataname}/utterances/', '../../../data/${dataname}/wav.scp', 16000, 256)"
+  matlab -nodesktop -nodisplay -nosplash -r  "synthesize('adversarial-wav/${dataname}_${thresh}dB', '../../../${dir}/adversarial_${dataname}/utterances/', '../../../data/${dataname}/wav.scp', 16000, 256)"
   cd ../../..
 
+  cp $dir/adversarial_${dataname}/scoring_kaldi/wer_details/utt_itr adversarial-wav/${dataname}_${thresh}dB/
+  cat > adversarial-wav/${dataname}_${thresh}dB/steps_per_itr << EOL
+  Backprob steps per Iteration: $itr
+  Maximum number of Iterations: $max_itr
+EOL
 
   for x in adversarial_$dataname; do
     steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
@@ -463,9 +468,9 @@ if [ $stage -le 13 ]; then
   done
 
   steps/nnet2/decode.sh --cmd "$decode_cmd" --nj $numjobs \
-    exp/tri4b/graph_bd_tgpr data/adversarial_$dataname "$dir/decode_${dataname}_${targetnum}_${thresh}_$itr"
+    exp/tri4b/graph_bd_tgpr data/adversarial_$dataname "$dir/decode_adversarial_${dataname}_${thresh}dB"
 
-  for x in "$dir/decode_${dataname}_${targetnum}_${thresh}_$itr"; do [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh; done
+  for x in "$dir/decode_adversarial_${dataname}_${thresh}dB"; do [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh; done
 
 fi
 

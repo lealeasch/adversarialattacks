@@ -21,7 +21,8 @@ max_active=7000
 min_active=200
 ivector_scale=1.0
 lattice_beam=8.0 # Beam we use in lattice generation.
-iter=final
+iter=100
+maxitr=50
 num_threads=1 # if >1, will use gmm-latgen-faster-parallel
 parallel_opts=  # ignored now.
 scoring_opts=
@@ -53,14 +54,15 @@ if [ $# -ne 9 ]; then
   echo "  --nj <nj>                                # number of parallel jobs"
   echo "  --cmd <cmd>                              # Command to run in parallel with"
   echo "  --beam <beam>                            # Decoding beam; default 15.0"
-  echo "  --iter <iter>                            # Iteration of model to decode; default is final."
+  echo "  --iter <iter>                            # Number of iterations per round"
+  echo "  --maxitr <maxitr>                        # Maximum number of iteration rounds"
   echo "  --scoring-opts <string>                  # options to local/score.sh"
   echo "  --num-threads <n>                        # number of threads to use, default 1."
   echo "  --parallel-opts <opts>                   # e.g. '--num-threads 4' if you supply --num-threads 4"
   echo "  --thresh <thresh>                        # e.g. "
   echo "  --numiter <numiter>                      # e.g. "
-  echo "  --experiment <experiment>                      # e.g. "
-  echo "  --targetnum <targetnum>                      # e.g. "
+  echo "  --experiment <experiment>                # e.g. "
+  echo "  --targetnum <targetnum>                  # e.g. "
   exit 1;
 fi
 
@@ -177,7 +179,7 @@ if [ ! -z "$online_ivector_dir" ]; then
 fi
 
 
-python "steps/nnet2/adversarial/init_text_tm.py" $experiment
+python "steps/nnet2/adversarial/init_text_tm.py" $experiment $thresh
 echo "$0: compiling graphs of transcripts"
 $cmd JOB=1:$nj $dir/log/compile_graphs.JOB.log \
   compile-train-graphs --read-disambig-syms=$lang/phones/disambig.int $tree $dirgmm/final.mdl  $lang/L.fst \
@@ -198,11 +200,13 @@ python "steps/nnet2/adversarial/init_target.py" $experiment $nj $rdir $num_state
 find $dir -name "adversarial.csv" -delete
 rm -f "$dir/scoring_kaldi/wer_details/utt_itr"
 
-for i in `seq 1 10`; 
+echo $maxitr
+
+for i in `seq 1 $maxitr`; 
 do
 
   echo "$dir/scoring_kaldi/wer_details/utt_itr"
-  echo "$0: Starting spoofing $i"
+  echo "$0: Starting Iteration $i of $maxitr"
   if [ $stage -le 1 ]; then
     #mkdir -p "$dir/utterances"
     $cmd --num-threads $num_threads JOB=1:$nj $dir/log/adversarial.JOB.log \
@@ -224,11 +228,10 @@ do
   if [ $stage -le 3 ]; then
     if ! $skip_scoring ; then
       [ ! -x local/score.sh ] && \
-        echo "Not scoring because local/score.sh does not exist or not executable." && exit 1;
+      echo "Not scoring because local/score.sh does not exist or not executable." && exit 1;
       echo "score best paths"
       [ "$iter" != "final" ] #&& iter_opt="--iter $iter"
       local/score.sh --cmd "$cmd" $scoring_opts $data $graphdir $dir
-      #local/score.sh $iter_opt $scoring_opts --cmd "$cmd" $data $graphdir $dir
       echo "score confidence and timing with sclite"
     fi
   fi
@@ -238,7 +241,7 @@ do
   echo "Decoding done."
 done
 
-mkdir "$dir/scoring_kaldi_${thresh}"
-mv $dir/scoring_kaldi/* "$dir/scoring_kaldi_${thresh}/" 
+#mkdir "$dir/scoring_kaldi_${thresh}"
+#mv $dir/scoring_kaldi/* "$dir/scoring_kaldi_${thresh}/" 
 
 exit 0;

@@ -1,14 +1,8 @@
 function [LTmin_all, LTq] = synthesize(dataset, adversarial_dir, datadir, fs, win_len)
 
-% dataset = 'test_dev93_mt_9';
-% adversarial_dir = 'exp/nnet5d_gpu_time/adversarial_test_dev93_mt_9/utterances/';
-% datadir = 'data/adversarial_test_dev93_mt_9/wav.scp';
-% fs = 16000;
-% win_len = 256;
 overlap = 0;
 
-dest_dir = strcat('../../../adversarial-wav/', dataset);
-
+dest_dir = strcat('../../../', dataset);
 
 cf.nfft = win_len;
 cf.overlap = overlap;
