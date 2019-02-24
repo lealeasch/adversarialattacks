@@ -5,19 +5,28 @@ Kaldi Speech Recognition Toolkit including Adversarial Examples
 
 - To build kaldi: see `./kaldi-adversarial/INSTALL`.  
 
-- The receipt can be found in `./kaldi-adversarial/egs/wsj/s5/run_mt.sh`. 
+- The receipt can be found in `./kaldi-adversarial/egs/wsj/s5/run_mt.sh`.
 
 - wsj data set is required
 
 Paper
 ================================
+
+If you want to cite the paper, please use the following BibTeX entry:
+
+
 @INPROCEEDINGS{Schoenherr2019,
+
   author = {Lea Sch\"{o}nherr and Katharina Kohls and Steffen Zeiler and Thorsten
   Holz and Dorothea Kolossa},
+
   title = {Adversarial Attacks Against Automatic Speech Recognition Systems
   via Psychoacoustic Hiding},
+
   booktitle = {accepted for Publication, NDSS},
+
   year = {2019}
+
 }
 
 
@@ -31,7 +40,7 @@ Description of stages:
 
 - Stage 10: decode data set which is used to create adversarial examples ($dataname), this information is used to create first targets
 
-- Stage 11: calculates hearing thresholds. 
+- Stage 11: calculates hearing thresholds.
 
 - Stage 12: calculates adversarial examples in $itr steps. Also includes the forced alignment step. Each steps conducts 100 backpropagation steps. The algorithm stops if the adversarial was successful and will only continue with the audio files, which have not been successful, yet.
 
