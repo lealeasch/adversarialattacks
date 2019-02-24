@@ -23,7 +23,7 @@ If you want to cite the paper, please use the following BibTeX entry:
   title = {Adversarial Attacks Against Automatic Speech Recognition Systems
   via Psychoacoustic Hiding},
 
-  booktitle = {accepted for Publication, NDSS},
+  booktitle = {Network and Distributed System Security Symposium (NDSS)},
 
   year = {2019}
 
