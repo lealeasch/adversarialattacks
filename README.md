@@ -11,13 +11,22 @@ Kaldi Speech Recognition Toolkit including Adversarial Examples
 
 Paper
 ================================
+
+If you want to cite the paper, please use the following BibTeX entry:
+
+
 @INPROCEEDINGS{Schoenherr2019,
+
   author = {Lea Sch\"{o}nherr and Katharina Kohls and Steffen Zeiler and Thorsten
   Holz and Dorothea Kolossa},
+  
   title = {Adversarial Attacks Against Automatic Speech Recognition Systems
   via Psychoacoustic Hiding},
+  
   booktitle = {accepted for Publication, NDSS},
+  
   year = {2019}
+  
 }
 
 
