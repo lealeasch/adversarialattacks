@@ -1,9 +1,9 @@
 #!/bin/bash
 stage=0
 
-dataname=test_dev93_mt_9
+dataname=music
 
-thresh=0
+thresh=40
 itr=100
 max_itr=50
 
@@ -20,9 +20,7 @@ decode=true  # set to false to disable the decoding-related scripts.
 . ./path.sh
 . utils/parse_options.sh  # e.g. this parses the --stage option if supplied.
 
-#data=/media/lea/boennbbc/kaldi_data/wsj/data
 data=data
-#exp=exp/media/lea/boennbbc/kaldi_data/wsj/exp
 exp=exp
 
 
@@ -416,11 +414,13 @@ fi
     exp/tri4b/graph_bd_tgpr data/test_eval92 $dir/decode_bd_tgpr_eval92
 fi
 
+
 if [ $stage -le 10 ]; then
 
   mkdir -p ${dir}/decode_${dataname}/utterances
 
   utils/spk2utt_to_utt2spk.pl data/${dataname}/spk2utt > data/${dataname}/utt2spk
+
 
   for x in $dataname; do
     steps/make_time.sh --cmd "$train_cmd" --nj $split data/$x || exit 1;
@@ -436,6 +436,8 @@ if [ $stage -le 10 ]; then
 
 fi
 
+
+
 if [ $stage -le 11 ]; then
 
   mkdir -p $dir/adversarial_${dataname}/thresholds
@@ -445,10 +447,15 @@ if [ $stage -le 11 ]; then
   cd ..
 fi
 
+
+
+
 if [ $stage -le 12 ]; then
   steps/nnet2/adversarial/adversarial_mt.sh --cmd "$decode_cmd" --nj $numjobs --thresh $thresh --numiter $itr --maxitr $max_itr --experiment $dataname \
     exp/tri4b/graph_bd_tgpr data/$dataname $dir/adversarial_$dataname exp/tri4b data/lang $dir/tree data/adversarial_$dataname $model_name $dir
 fi
+
+
 
 if [ $stage -le 13 ]; then
 
@@ -458,8 +465,8 @@ if [ $stage -le 13 ]; then
 
   cp $dir/adversarial_${dataname}/scoring_kaldi/wer_details/utt_itr adversarial-wav/${dataname}_${thresh}dB/
   cat > adversarial-wav/${dataname}_${thresh}dB/steps_per_itr << EOL
-  Backprob steps per Iteration: $itr
-  Maximum number of Iterations: $max_itr
+  Backprob Steps per Iteration: $itr
+  Maximum Number of Iterations: $max_itr
 EOL
 
   for x in adversarial_$dataname; do

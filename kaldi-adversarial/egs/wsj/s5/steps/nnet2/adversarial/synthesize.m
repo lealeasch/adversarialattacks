@@ -23,7 +23,7 @@ fclose(fid);
 mkdir(fullfile(dest_dir))
 for uu = 1:length(utt)
     
-    [x,fs_o] = audioread(audiofile{uu});
+    [x,fs_o] = audioread(strcat('../../../', audiofile{uu}));
     
     % resample?
     if fs_o ~= fs
