@@ -29,8 +29,9 @@ If you want to cite the paper, please use the following BibTeX entry:
 
 }
 
-Paper
+Website
 ================================
+
 https://adversarial-attacks.net/
 
 
@@ -57,14 +58,14 @@ The neccessary files are stored in `./kaldi-adversarial/egs/wsj/s5/data/` and al
 
 - wav.scp: utterance_id wav file
 - spk2utt: skeaker_id utterance_id
-	- use this file to define one utterance per speaker, which will help to parallelize the algorithm, inpedendent from the real speaker id, if exists (split is defined per speaker)
+  - use this file to define one utterance per speaker, which will help to parallelize the algorithm, inpedendent from the real speaker id, if exists (split is defined per speaker)
 - spk2gender: skeaker_id gender
-	- not really necessary, might be removed in a later release, can be set arbitrary
+  - not really necessary, might be removed in a later release, can be set arbitrary
 - text: utterance_id text
-	- any text, or the real transcription (not the target text)
+  - any text, or the real transcription (not the target text)
 - target: utterance_id index_to_target
-	- refers to ./kaldi-adversarial/egs/wsj/s5/targets/target-utterances.txt (line - 1)
-	- if you want a new target, add the new text, one per line, or modify this file
+  - refers to ./kaldi-adversarial/egs/wsj/s5/targets/target-utterances.txt (line - 1)
+  - if you want a new target, add the new text, one per line, or modify this file
 
 
 parameter description in run_mt.sh:
