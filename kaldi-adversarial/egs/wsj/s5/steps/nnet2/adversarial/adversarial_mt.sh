@@ -80,7 +80,7 @@ num_states=$(cat $net_dir/num_states) || exit 1;
 echo $num_states
 
 srcdir=`dirname $dir`; # Assume model directory one level up from decoding directory.
-model=$srcdir/$iter.mdl
+model=$srcdir/final.mdl
 sdata=$data/split$nj;
 sdatasp=$datasp/split$nj;
 oov=`cat $lang/oov.int`
