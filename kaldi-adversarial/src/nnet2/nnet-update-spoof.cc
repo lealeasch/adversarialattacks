@@ -222,7 +222,7 @@ double SpoofUpdater::BackpropInput(CuMatrix<BaseFloat> *deriv, CuMatrix<BaseFloa
       CuMatrix<BaseFloat> scale_factors(modified.NumRows(), modified.NumCols());
       CuMatrix<BaseFloat> scale_factors2(thresholds_norm);
 
-
+      //if(max_val_dB != 0.0) {
       if(original_magn.NumRows() != 0) {
 
         modified.AddMat(-1, original_magn);
@@ -242,19 +242,50 @@ double SpoofUpdater::BackpropInput(CuMatrix<BaseFloat> *deriv, CuMatrix<BaseFloa
 
         deriv->MulElements(scale_factors);
 
+        KALDI_LOG << "ORIGNAL: " << original_magn(20,20);
+        KALDI_LOG << "MAX: " << max_val_dB;
 
-      } else {
+      } 
+      
+      // get max in db for normalization
+      // for the very first run, where we don't know the original magnitude
+      if(max_val_dB == 0.0 && original_magn.NumRows() == 0) {
         CalculateMagnitute(output, &modified_dB);
+
         max_val_dB = std::numeric_limits<BaseFloat>::epsilon();
         for(int c = 0; c < modified_dB.NumCols(); c++) {
           for(int r = 0; r <  modified_dB.NumRows(); r++) {
 
-            if(modified_dB(r,c) > max_val_dB)
+            if(modified_dB(r,c) > max_val_dB) 
               max_val_dB = modified_dB(r,c);
-            }
-        }
-        KALDI_LOG << "Max in dB: " << max_val_dB;
+            
+          } 
+        } 
+        KALDI_LOG << "FIRST OUTPUT: " << output(20,20);
+        KALDI_LOG << "FIRST TIME EVER MAX: " << max_val_dB;
+
       }
+
+      // get max in db for normalization
+      // if we start a new iteration, but already knew the magnitude from previous iteration
+      if(max_val_dB == 0.0 && original_magn.NumRows() != 0) {
+        CalculateMagnitute(original_magn, &modified_dB);
+
+        max_val_dB = std::numeric_limits<BaseFloat>::epsilon();
+        for(int c = 0; c < modified_dB.NumCols(); c++) {
+          for(int r = 0; r <  modified_dB.NumRows(); r++) {
+
+            if(modified_dB(r,c) > max_val_dB) 
+              max_val_dB = modified_dB(r,c);
+            
+          } 
+        } 
+
+        KALDI_LOG << "FIRST IN ITER MAX: " << max_val_dB;
+
+      }
+
+
       //scale_factors2.Scale(0.1);
       deriv->MulElements(scale_factors2);
       original_magn = output;

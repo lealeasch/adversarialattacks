@@ -550,10 +550,15 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     double tot_diff = 0;
     CuMatrix<BaseFloat> output_grad;
     CuMatrix<BaseFloat> updated_feats(feats);
+    CuMatrix<BaseFloat> keep_original_mag(feats);
     CuMatrix<BaseFloat> log_probs_updated(log_probs);
 
     std::string dir_utt_updated = path + "/utterances/" + utt + "/adversarial.csv";
     ReadCuMatrixBaseFloat(dir_utt_updated, &updated_feats, false);
+
+    // read in original
+    std::string dir_utt_original = path + "/utterances/" + utt + "/original.csv";
+    ReadCuMatrixBaseFloat(dir_utt_original, &keep_original_mag, false);
 
     Matrix<BaseFloat> results;
 
@@ -602,12 +607,18 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     KALDI_LOG << "target_log_probs.NumRows: " << target_log_probs.NumRows();
     KALDI_LOG << "target_log_probs.NumCols: " << target_log_probs.NumCols();
 
-    // Do Spoofing
     CuMatrix<BaseFloat> original_mag(0,0);
     double max_val_dB = 0;
-    max_val_dB = DoSpoof(am_nnet.GetNnet(), updated_feats, original_mag, thresholds, thresholds_norm, output_grad, target_log_probs, 0, thresh, &tot_diff, pad_input);
-    CuMatrix<BaseFloat> keep_original_mag(original_mag);
-
+    // if original does nich exits (first time)
+    if(keep_original_mag(0,0) == feats(0,0)) { // hot, hot fix!!!!
+      max_val_dB = DoSpoof(am_nnet.GetNnet(), updated_feats, original_mag, thresholds, thresholds_norm, output_grad, target_log_probs, 0, thresh, &tot_diff, pad_input);
+      keep_original_mag = original_mag;
+    } else {
+      // be careful to save the original magnitude
+      original_mag = keep_original_mag;
+      max_val_dB = DoSpoof(am_nnet.GetNnet(), updated_feats, original_mag, thresholds, thresholds_norm, output_grad, target_log_probs, 0, thresh, &tot_diff, pad_input);
+      original_mag = keep_original_mag;
+    }
 
     KALDI_LOG << "Num Iterations: " << num_iter;
     KALDI_LOG << "Threshold : " << thresh;
@@ -644,9 +655,12 @@ class DecodableAmNnetSpoofIter: public DecodableInterface {
     //updated_feats_normed = reNormalize(updated_feats, utt);
     //updated_feats.Scale(max_val);
 
-     std::string path_adv = path +  + "/utterances/";
+    std::string path_adv = path +  + "/utterances/";
     saveMatrix(updated_feats, utt, path_adv, "adversarial");
 
+    // write original magnitude on disc
+    std::string path_original = path +  + "/utterances/";
+    saveMatrix(keep_original_mag, utt, path_original, "original");
 
     log_probs_updated.ApplyFloor(1.0e-20); // Avoid log of zero which leads to NaN.
     log_probs_updated.ApplyLog();
